@@ -1,0 +1,21 @@
+package com.danoff.common.web.exception;
+
+public final class ApiConflictException extends RuntimeException {
+
+    public ApiConflictException() {
+        super();
+    }
+
+    public ApiConflictException(final String message, final Throwable cause) {
+        super(message, cause);
+    }
+
+    public ApiConflictException(final String message) {
+        super(message);
+    }
+
+    public ApiConflictException(final Throwable cause) {
+        super(cause);
+    }
+
+}

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+    <changeSet author="Denis (generated)" id="1523995751723-1">
+        <createSequence sequenceName="CONTACT_ID_SEQ"/>
+    </changeSet>
+    <changeSet author="Denis (generated)" id="1523995751723-2">
+        <createSequence sequenceName="CONTACT_TYPE_ID_SEQ"/>
+    </changeSet>
+    <changeSet author="Denis (generated)" id="1523995751723-3">
+        <createSequence sequenceName="LEADER_ID_SEQ"/>
+    </changeSet>
+    <changeSet author="Denis (generated)" id="1523995751723-4">
+        <createSequence sequenceName="MEMBER_ID_SEQ"/>
+    </changeSet>
+    <changeSet author="Denis (generated)" id="1523995751723-5">
+        <createSequence sequenceName="WORK_PROFILE_ID_SEQ"/>
+    </changeSet>
+    <changeSet author="Denis (generated)" id="1523995751723-6">
+        <createTable tableName="MEMBER">
+            <column defaultValueComputed="NEXTVAL('team.member_id_seq')" name="ID" type="INT(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="EMAIL" type="VARCHAR(2147483647)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="FIRST_NAME" type="VARCHAR(2147483647)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="LAST_NAME" type="VARCHAR(2147483647)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="PHOTO_URL" type="VARCHAR(2147483647)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="HIRE_DATE" type="date">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Denis (generated)" id="1523995751723-7">
+        <addPrimaryKey columnNames="ID" constraintName="MEMBER_PK" tableName="MEMBER"/>
+    </changeSet>
+</databaseChangeLog>
