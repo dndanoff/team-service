@@ -1,0 +1,1 @@
+INSERT INTO MEMBER(EMAIL, FIRST_NAME, LAST_NAME, PHOTO_URL, HIRE_DATE) VALUES('denis.danov@dreamix.eu','Denis', 'Danov', 'https://dreamix.eu/images/team/Denis_Danov_Java-Expert.jpg',parsedatetime('2013-07-08 10:00:00', 'yyyy-MM-dd HH:mm:ss'));

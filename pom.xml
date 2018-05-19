@@ -10,5 +10,6 @@
     <modules>
 		<module>common</module>
 		<module>team-service</module>
+		<module>team-ui</module>
     </modules>
 </project>

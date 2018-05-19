@@ -5,7 +5,7 @@
 
 	<groupId>com.danoff</groupId>
 	<artifactId>team-service</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.0</version>
 	<packaging>jar</packaging>
 
 	<name>team-service</name>
@@ -34,7 +34,7 @@
 		<dependency>
 			<groupId>com.danoff</groupId>
 			<artifactId>common</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<version>1.0.0</version>
 		</dependency>
 
 		<!-- Core Boot -->
@@ -165,14 +165,6 @@
 				</executions>
 			</plugin>
 			<plugin>
-				<groupId>org.liquibase</groupId>
-				<artifactId>liquibase-maven-plugin</artifactId>
-				<version>${liquibase.plugin.version}</version>
-				<configuration>
-					<propertyFile>${project.basedir}/src/main/resources/db/liquibase-plugin.properties</propertyFile>
-				</configuration>
-			</plugin>
-			<plugin>
 				<groupId>com.spotify</groupId>
 				<artifactId>dockerfile-maven-plugin</artifactId>
 				<version>${dockerfile-maven.version}</version>
@@ -219,11 +211,19 @@
 								</goals>
 								<configuration>
 									<files>
-										<file>${project.basedir}/src/main/resources/db/db-dev.properties</file>
+										<file>${project.basedir}/src/main/resources/application-dev.properties</file>
 									</files>
 								</configuration>
 							</execution>
 						</executions>
+					</plugin>
+					<plugin>
+						<groupId>org.liquibase</groupId>
+						<artifactId>liquibase-maven-plugin</artifactId>
+						<version>${liquibase.plugin.version}</version>
+						<configuration>
+							<propertyFile>${project.basedir}/src/main/resources/db/liquibase-plugin.properties</propertyFile>
+						</configuration>
 					</plugin>
 					<plugin>
 						<groupId>org.jooq</groupId>

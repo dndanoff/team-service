@@ -1,4 +1,4 @@
-package com.danoff.team.config;
+package com.danoff.ui.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -22,13 +22,5 @@ public class ApplicationProperties {
 	
 	public String getAdminPassword() {
 		return env.getProperty("security.admin.password");
-	}
-	
-	public String getApiClientUsername() {
-		return env.getProperty("security.user.username");
-	}
-	
-	public String getApiClientPassword() {
-		return env.getProperty("security.user.password");
 	}
 }
