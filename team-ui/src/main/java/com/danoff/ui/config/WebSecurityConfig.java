@@ -6,6 +6,8 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
@@ -24,14 +26,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         	.httpBasic()
         		.and()
         	.authorizeRequests()
-        		.antMatchers("/management").hasAnyRole("ADMIN")
+        		.antMatchers("/app/**").hasAnyRole("ADMIN")
         		.anyRequest().permitAll();
         http.headers().frameOptions().disable();
     }
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication()
-                .withUser(appConfig.getAdminUsername()).password(appConfig.getAdminPassword()).roles("ADMIN","ACTUATOR");
+    	PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        auth.inMemoryAuthentication().passwordEncoder(passwordEncoder)
+                .withUser(appConfig.getAdminUsername()).password(passwordEncoder.encode(appConfig.getAdminPassword())).roles("ADMIN","ACTUATOR");
     }
 }

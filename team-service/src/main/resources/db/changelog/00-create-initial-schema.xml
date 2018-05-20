@@ -2,7 +2,7 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
 	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
-	<changeSet author="Denis (generated)" id="1523995751723-2">
+	<changeSet author="Denis (generated)" id="1523995751723-2" logicalFilePath="db/00-create-initial-schema.xml">
 		<createTable tableName="MEMBER">
 			<column autoIncrement="true" name="ID" type="BIGINT(19)">
 				<constraints primaryKey="true" primaryKeyName="MEMBER_PK" />

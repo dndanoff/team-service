@@ -26,6 +26,8 @@
 		<webjars-locator.version>0.31</webjars-locator.version>
 		<webjars-bootstrap.version>4.1.0</webjars-bootstrap.version>
 		<webjars-jquery.version>3.2.1</webjars-jquery.version>
+		<webjars-react.version>16.2.0</webjars-react.version>
+		<webjars-react-router.version>4.2.0</webjars-react-router.version>
 	</properties>
 
 	<dependencies>
@@ -62,6 +64,16 @@
 			<groupId>org.webjars</groupId>
 			<artifactId>jquery</artifactId>
 			<version>${webjars-jquery.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.webjars.npm</groupId>
+			<artifactId>react-dom</artifactId>
+			<version>${webjars-react.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.webjars.npm</groupId>
+			<artifactId>react-router</artifactId>
+			<version>${webjars-react-router.version}</version>
 		</dependency>
 		<!-- UI Optimization -->
 		<dependency>
