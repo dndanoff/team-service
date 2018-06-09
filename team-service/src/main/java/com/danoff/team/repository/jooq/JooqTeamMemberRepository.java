@@ -31,34 +31,41 @@ public class JooqTeamMemberRepository implements TeamMemberRepository {
 
 	@Override
 	public List<TeamMember> findAll() {
-		LOGGER.debug("Fetching all members");
-		return create.selectFrom(Member.MEMBER).fetch().stream()
+		LOGGER.debug("Calling findAll()");
+		List<TeamMember> result = create.selectFrom(Member.MEMBER).fetch().stream()
 				.map(r -> TeamMemberMapper.INSTANCE.memberRecordToTeamMember(r)).collect(Collectors.toList());
+		LOGGER.debug("Calling findAll() fetched={}", result);
+		return result;
 	}
 
 	@Override
 	public List<TeamMember> findPaginated(int pageSize, int pageNumber) {
-		LOGGER.debug("Fetching members from page {} with size {}", pageNumber, pageSize);
-		return create.selectFrom(Member.MEMBER).limit(pageSize).offset(pageNumber).fetch().stream()
+		LOGGER.debug("Calling findPaginated() with params: pageSize={}, pageNumber={}", pageSize, pageNumber);
+		List<TeamMember> result = create.selectFrom(Member.MEMBER).limit(pageSize).offset(pageNumber).fetch().stream()
 				.map(r -> mapper.memberRecordToTeamMember(r)).collect(Collectors.toList());
+		LOGGER.debug("Calling findPaginated() fetched={}", result);
+		return result;
 	}
 
 	@Override
 	public int count() {
-		LOGGER.debug("Fetching total members count");
-		return create.fetchCount(create.selectFrom(Member.MEMBER));
+		LOGGER.debug("Calling count()");
+		int result = create.fetchCount(create.selectFrom(Member.MEMBER));
+		LOGGER.debug("Calling count() fetched={}", result);
+		return result;
 	}
 
 	@Override
 	public TeamMember findMember(Long id) {
-		LOGGER.debug("Fetching member with id {}", id);
+		LOGGER.debug("Calling findMember() with params: id={}", id);
 		MemberRecord record = create.fetchOne(Member.MEMBER, Member.MEMBER.ID.eq(id));
+		LOGGER.debug("Calling findMember() fetched={}", record);
 		return mapper.memberRecordToTeamMember(record);
 	}
 
 	@Override
 	public Long createMember(TeamMember member) {
-		LOGGER.debug("Creating member {}", member);
+		LOGGER.debug("Calling createMember() with params: member={}", member);
 		MemberRecord record = create.insertInto(Member.MEMBER)
 		.set(Member.MEMBER.FIRST_NAME, member.getFirstName())
 		.set(Member.MEMBER.LAST_NAME, member.getLastName())
@@ -67,13 +74,14 @@ public class JooqTeamMemberRepository implements TeamMemberRepository {
 		.set(Member.MEMBER.PHOTO_URL, member.getPhotoUrl())
 		.returning(Member.MEMBER.ID)
 		.fetchOne();
+		LOGGER.debug("Calling createMember() returned={}", record.getId());
 		
 		return new Long(record.getId().intValue());
 	}
 
 	@Override
 	public void updateMember(TeamMember member) {
-		LOGGER.debug("Updating member {}", member);
+		LOGGER.debug("Calling updateMember() with params: member={}", member);
 		create.update(Member.MEMBER)
 		.set(Member.MEMBER.FIRST_NAME, member.getFirstName())
 		.set(Member.MEMBER.LAST_NAME, member.getLastName())
@@ -85,7 +93,7 @@ public class JooqTeamMemberRepository implements TeamMemberRepository {
 
 	@Override
 	public void deleteMember(Long id) {
-		LOGGER.debug("Deleting member with id {}", id);
+		LOGGER.debug("Calling deleteMember() with params: id={}", id);
 		create.deleteFrom(Member.MEMBER).where(Member.MEMBER.ID.eq(id)).execute();
 	}
 

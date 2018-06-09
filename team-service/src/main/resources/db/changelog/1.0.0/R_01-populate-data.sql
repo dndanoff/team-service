@@ -1,0 +1,1 @@
+DELETE FROM MEMBER WHERE EMAIL = 'denis.danov@dreamix.eu';

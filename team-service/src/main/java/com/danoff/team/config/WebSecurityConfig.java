@@ -23,11 +23,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
         	.csrf()
         		.disable()
-        	.httpBasic()
-        		.and()
         	.authorizeRequests()
+        		.antMatchers("/management/info","/management/health").permitAll()
         		.antMatchers("/members", "/swagger-ui").hasAnyRole("USER", "ADMIN")
-        		.anyRequest().hasRole("ADMIN");
+        		.anyRequest().hasRole("ADMIN")
+        	.and()
+        		.httpBasic();
         http.headers().frameOptions().disable();
     }
 
