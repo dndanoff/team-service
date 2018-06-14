@@ -2,12 +2,14 @@
 
 <groups xmlns="http://www.isdc.ro/wro">
 	<group name="base">
-		<css>webjar:bootstrap.css</css>
+		<css>webjar:css/bootstrap.css</css>
 		<css>/css/style.css</css>
 		<js>webjar:jquery.min.js</js>
-		<js>webjar:bootstrap.min.js</js>
-		<js>webjar:umd/react-dom.development.js</js>
+		<js>webjar:js/bootstrap.min.js</js>
+		<js>webjar:babel.js</js>
+		<js>webjar:umd/react.development.js</js>
 		<js>webjar:react-router.js</js>
+		<js>webjar:umd/react-dom.development.js</js>
 		<js>/js/app.js</js>
 	</group>
 </groups>

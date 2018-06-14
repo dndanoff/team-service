@@ -67,6 +67,11 @@
 		</dependency>
 		<dependency>
 			<groupId>org.webjars.npm</groupId>
+			<artifactId>react</artifactId>
+			<version>${webjars-react.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.webjars.npm</groupId>
 			<artifactId>react-dom</artifactId>
 			<version>${webjars-react.version}</version>
 		</dependency>
@@ -75,6 +80,11 @@
 			<artifactId>react-router</artifactId>
 			<version>${webjars-react-router.version}</version>
 		</dependency>
+		<dependency>
+    <groupId>org.webjars.npm</groupId>
+    <artifactId>babel-standalone</artifactId>
+    <version>6.26.0</version>
+</dependency>
 		<!-- UI Optimization -->
 		<dependency>
 			<groupId>ro.isdc.wro4j</groupId>
