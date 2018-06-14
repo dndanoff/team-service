@@ -1,0 +1,4 @@
+/*Needed because of fixed top menu*/
+body { 
+    padding-top: 65px; 
+}

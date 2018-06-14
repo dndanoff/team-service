@@ -2,8 +2,10 @@
 
 <groups xmlns="http://www.isdc.ro/wro">
 	<group name="base">
-		<css>webjar:css/bootstrap.css</css>
+		<!-- CSS -->
+		<css>webjar:css/bootstrap.min.css</css>
 		<css>/css/style.css</css>
+		<!-- JS -->
 		<js>webjar:jquery.min.js</js>
 		<js>webjar:js/bootstrap.min.js</js>
 		<js>webjar:babel.js</js>
