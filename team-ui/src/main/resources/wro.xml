@@ -10,8 +10,8 @@
 		<js>webjar:js/bootstrap.min.js</js>
 		<js>webjar:babel.js</js>
 		<js>webjar:umd/react.development.js</js>
-		<js>webjar:react-router.js</js>
 		<js>webjar:umd/react-dom.development.js</js>
+		<js>webjar:umd/react-router-dom.js</js>
 		<js>/js/app.js</js>
 	</group>
 </groups>
