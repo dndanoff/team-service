@@ -40,7 +40,7 @@ function App(props) {
 
 function Menu(props) {
   return <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-			<a class="navbar-brand" href="#">Dreamix</a>
+			<a class="navbar-brand" href="/">Dreamix</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse"
 				data-target="#menu" aria-controls="menu" aria-expanded="false"
 				aria-label="Toggle menu">
