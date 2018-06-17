@@ -51,8 +51,11 @@ class Menu extends React.Component {
 class TeamList extends React.Component {
 	  constructor(props) {
 	    super(props);
+	    this.handleSearch = this.handleSearch.bind(this);
+
 	    this.state = {
 			employees: [],
+			originalEmployees: [],
 			pageNumber:0,
 			error: ""
 		};
@@ -66,7 +69,8 @@ class TeamList extends React.Component {
 		    })
 		    .done(function(data) {
 		    	that.setState((prevState, props) => ({
-		    		employees: data
+		    		employees: data,
+		    		originalEmployees: data
 	    		}));
 		    })
 		    .fail(function() {
@@ -76,6 +80,7 @@ class TeamList extends React.Component {
 		    	
 		    	that.setState((prevState, props) => ({
 		    		employees: [],
+		    		originalEmployees: [],
 		    		error:"Failed to retrieve employees"
 	    		}));
 		    });
@@ -83,6 +88,31 @@ class TeamList extends React.Component {
 
 	  componentWillUnmount() {
 	    
+	  }
+	  
+	  handleSearch(input){
+		input = input.toUpperCase();
+		let filteredEmployees = [];
+		
+		if(this.isEmpty(input)){
+			filteredEmployees = this.state.originalEmployees;
+		}else{
+			for (let i = 0; i < this.state.originalEmployees.length; i++) {
+				let employee = this.state.originalEmployees[i];
+				let fullName = (employee.firstName+" "+employee.lastName).toUpperCase();
+				if(fullName.startsWith(input)){
+					filteredEmployees.push(employee);
+				}
+			}
+		}
+		
+		this.setState((prevState, props) => ({
+    		employees: filteredEmployees
+		}));
+	  }
+	  
+	  isEmpty(str) {
+		  return (!str || 0 === str.length);
 	  }
 	  	
 	  render() {
@@ -93,6 +123,7 @@ class TeamList extends React.Component {
 		  
 	    return (
 	    	<div id="employees-page">
+	    		<Search onSearch={this.handleSearch}/>
 	    		<div id="error" class="row">
 	    			{this.state.error}
 	    		</div>
@@ -102,6 +133,46 @@ class TeamList extends React.Component {
 					</div>
 				</div>
 			</div>
+	    );
+	  }
+}
+
+class Search extends React.Component {
+	  constructor(props) {
+	    super(props);
+	    this.handleChange = this.handleChange.bind(this);
+	    this.handleClick = this.handleClick.bind(this);
+	    
+	    this.state = {
+	    	searchInput: ""
+	    }
+	  }
+
+	  handleChange(e) {
+		let newValue = e.target.value;
+		this.setState((prevState, props) => ({
+			searchInput: newValue
+  		}));
+	    this.props.onSearch(newValue);
+	  }
+	  
+	  handleClick(){
+		  this.setState((prevState, props) => ({
+				searchInput: ""
+		  }));
+		  this.props.onSearch("");
+	  }
+
+
+	  render() {
+		const input = this.state.searchInput;
+	    return (
+    		<div class="input-group mb-3">
+    		  <input type="text" value={input}  onChange={this.handleChange} class="form-control" placeholder="employee name" aria-label="employee name" aria-describedby="basic-addon2" />
+    		  <div class="input-group-append">
+    		    <button class="btn btn-outline-secondary" type="button" onClick={this.handleClick}>X</button>
+    		  </div>
+    		</div>
 	    );
 	  }
 }
