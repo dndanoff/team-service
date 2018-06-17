@@ -12,6 +12,13 @@
 		<js>webjar:umd/react.development.js</js>
 		<js>webjar:umd/react-dom.development.js</js>
 		<js>webjar:umd/react-router-dom.js</js>
+	</group>
+	<group name="app">
+		<!--  React App -->
+		<js>/js/components/menu.js</js>
+		<js>/js/components/search.js</js>
+		<js>/js/components/employee.js</js>
+		<js>/js/pages/team.js</js>
 		<js>/js/app.js</js>
 	</group>
 </groups>
