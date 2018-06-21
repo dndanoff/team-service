@@ -88,6 +88,16 @@ public class Member extends TableImpl<MemberRecord> {
     public final TableField<MemberRecord, Long> TEAM_ID = createField("TEAM_ID", org.jooq.impl.SQLDataType.BIGINT, this, "");
 
     /**
+     * The column <code>PUBLIC.MEMBER.PHONE_NUMBER</code>.
+     */
+    public final TableField<MemberRecord, String> PHONE_NUMBER = createField("PHONE_NUMBER", org.jooq.impl.SQLDataType.VARCHAR.length(2147483647), this, "");
+
+    /**
+     * The column <code>PUBLIC.MEMBER.SKYPE</code>.
+     */
+    public final TableField<MemberRecord, String> SKYPE = createField("SKYPE", org.jooq.impl.SQLDataType.VARCHAR.length(2147483647), this, "");
+
+    /**
      * Create a <code>PUBLIC.MEMBER</code> table reference
      */
     public Member() {

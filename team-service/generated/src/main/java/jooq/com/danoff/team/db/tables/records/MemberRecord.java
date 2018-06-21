@@ -12,8 +12,8 @@ import javax.annotation.Generated;
 
 import org.jooq.Field;
 import org.jooq.Record1;
-import org.jooq.Record7;
-import org.jooq.Row7;
+import org.jooq.Record9;
+import org.jooq.Row9;
 import org.jooq.impl.UpdatableRecordImpl;
 
 
@@ -130,6 +130,34 @@ public class MemberRecord extends UpdatableRecordImpl<MemberRecord> implements R
         return (Long) get(6);
     }
 
+    /**
+     * Setter for <code>PUBLIC.MEMBER.PHONE_NUMBER</code>.
+     */
+    public void setPhoneNumber(String value) {
+        set(7, value);
+    }
+
+    /**
+     * Getter for <code>PUBLIC.MEMBER.PHONE_NUMBER</code>.
+     */
+    public String getPhoneNumber() {
+        return (String) get(7);
+    }
+
+    /**
+     * Setter for <code>PUBLIC.MEMBER.SKYPE</code>.
+     */
+    public void setSkype(String value) {
+        set(8, value);
+    }
+
+    /**
+     * Getter for <code>PUBLIC.MEMBER.SKYPE</code>.
+     */
+    public String getSkype() {
+        return (String) get(8);
+    }
+
     // -------------------------------------------------------------------------
     // Primary key information
     // -------------------------------------------------------------------------
@@ -143,7 +171,7 @@ public class MemberRecord extends UpdatableRecordImpl<MemberRecord> implements R
     }
 
     // -------------------------------------------------------------------------
-    // Record7 type implementation
+    // Record9 type implementation
     // -------------------------------------------------------------------------
 
     /**
@@ -222,6 +250,22 @@ public class MemberRecord extends UpdatableRecordImpl<MemberRecord> implements R
      * {@inheritDoc}
      */
     @Override
+    public Field<String> field8() {
+        return Member.MEMBER.PHONE_NUMBER;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Field<String> field9() {
+        return Member.MEMBER.SKYPE;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public Long value1() {
         return getId();
     }
@@ -272,6 +316,22 @@ public class MemberRecord extends UpdatableRecordImpl<MemberRecord> implements R
     @Override
     public Long value7() {
         return getTeamId();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String value8() {
+        return getPhoneNumber();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String value9() {
+        return getSkype();
     }
 
     /**
@@ -340,6 +400,8 @@ public class MemberRecord extends UpdatableRecordImpl<MemberRecord> implements R
         value5(value5);
         value6(value6);
         value7(value7);
+        value8(value8);
+        value9(value9);
         return this;
     }
 
@@ -367,5 +429,7 @@ public class MemberRecord extends UpdatableRecordImpl<MemberRecord> implements R
         set(4, titleId);
         set(5, hireDate);
         set(6, teamId);
+        set(7, phoneNumber);
+        set(8, skype);
     }
 }

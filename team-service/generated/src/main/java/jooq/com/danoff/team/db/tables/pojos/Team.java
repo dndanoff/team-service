@@ -23,12 +23,14 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Team implements Serializable {
 
-    private static final long serialVersionUID = 1301198433;
+    private static final long serialVersionUID = 1708195794;
 
     private Long      id;
     private String    name;
     private String    projectName;
     private LocalDate establishedDate;
+    private String    room;
+    private String    technologies;
 
     public Team() {}
 
@@ -37,18 +39,24 @@ public class Team implements Serializable {
         this.name = value.name;
         this.projectName = value.projectName;
         this.establishedDate = value.establishedDate;
+        this.room = value.room;
+        this.technologies = value.technologies;
     }
 
     public Team(
         Long      id,
         String    name,
         String    projectName,
-        LocalDate establishedDate
+        LocalDate establishedDate,
+        String    room,
+        String    technologies
     ) {
         this.id = id;
         this.name = name;
         this.projectName = projectName;
         this.establishedDate = establishedDate;
+        this.room = room;
+        this.technologies = technologies;
     }
 
     public Long getId() {
@@ -83,6 +91,22 @@ public class Team implements Serializable {
         this.establishedDate = establishedDate;
     }
 
+    public String getRoom() {
+        return this.room;
+    }
+
+    public void setRoom(String room) {
+        this.room = room;
+    }
+
+    public String getTechnologies() {
+        return this.technologies;
+    }
+
+    public void setTechnologies(String technologies) {
+        this.technologies = technologies;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("Team (");
@@ -91,6 +115,8 @@ public class Team implements Serializable {
         sb.append(", ").append(name);
         sb.append(", ").append(projectName);
         sb.append(", ").append(establishedDate);
+        sb.append(", ").append(room);
+        sb.append(", ").append(technologies);
 
         sb.append(")");
         return sb.toString();
