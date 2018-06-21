@@ -36,7 +36,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Team extends TableImpl<TeamRecord> {
 
-    private static final long serialVersionUID = 959258639;
+    private static final long serialVersionUID = 852259093;
 
     /**
      * The reference instance of <code>PUBLIC.TEAM</code>
@@ -70,6 +70,16 @@ public class Team extends TableImpl<TeamRecord> {
      * The column <code>PUBLIC.TEAM.ESTABLISHED_DATE</code>.
      */
     public final TableField<TeamRecord, LocalDate> ESTABLISHED_DATE = createField("ESTABLISHED_DATE", org.jooq.impl.SQLDataType.LOCALDATE.nullable(false), this, "");
+
+    /**
+     * The column <code>PUBLIC.TEAM.ROOM</code>.
+     */
+    public final TableField<TeamRecord, String> ROOM = createField("ROOM", org.jooq.impl.SQLDataType.VARCHAR.length(2147483647).nullable(false), this, "");
+
+    /**
+     * The column <code>PUBLIC.TEAM.TECHNOLOGIES</code>.
+     */
+    public final TableField<TeamRecord, String> TECHNOLOGIES = createField("TECHNOLOGIES", org.jooq.impl.SQLDataType.VARCHAR.length(2147483647), this, "");
 
     /**
      * Create a <code>PUBLIC.TEAM</code> table reference

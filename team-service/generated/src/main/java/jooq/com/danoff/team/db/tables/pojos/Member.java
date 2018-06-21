@@ -23,7 +23,7 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Member implements Serializable {
 
-    private static final long serialVersionUID = -1068705713;
+    private static final long serialVersionUID = 1035374220;
 
     private Long      id;
     private String    email;
@@ -32,6 +32,8 @@ public class Member implements Serializable {
     private String    photoUrl;
     private LocalDate hireDate;
     private Long      teamId;
+    private String    phoneNumber;
+    private String    skype;
 
     public Member() {}
 
@@ -43,6 +45,8 @@ public class Member implements Serializable {
         this.photoUrl = value.photoUrl;
         this.hireDate = value.hireDate;
         this.teamId = value.teamId;
+        this.phoneNumber = value.phoneNumber;
+        this.skype = value.skype;
     }
 
     public Member(
@@ -52,7 +56,9 @@ public class Member implements Serializable {
         String    lastName,
         String    photoUrl,
         LocalDate hireDate,
-        Long      teamId
+        Long      teamId,
+        String    phoneNumber,
+        String    skype
     ) {
         this.id = id;
         this.email = email;
@@ -61,6 +67,8 @@ public class Member implements Serializable {
         this.photoUrl = photoUrl;
         this.hireDate = hireDate;
         this.teamId = teamId;
+        this.phoneNumber = phoneNumber;
+        this.skype = skype;
     }
 
     public Long getId() {
@@ -119,6 +127,22 @@ public class Member implements Serializable {
         this.teamId = teamId;
     }
 
+    public String getPhoneNumber() {
+        return this.phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getSkype() {
+        return this.skype;
+    }
+
+    public void setSkype(String skype) {
+        this.skype = skype;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("Member (");
@@ -130,6 +154,8 @@ public class Member implements Serializable {
         sb.append(", ").append(photoUrl);
         sb.append(", ").append(hireDate);
         sb.append(", ").append(teamId);
+        sb.append(", ").append(phoneNumber);
+        sb.append(", ").append(skype);
 
         sb.append(")");
         return sb.toString();

@@ -12,4 +12,7 @@ public class TeamMember {
 	private String lastName;
 	private String photoUrl;
 	private LocalDate hireDate;
+	private Long teamID;
+	private String phoneNumber;
+	private String Skype;
 }

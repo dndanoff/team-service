@@ -74,6 +74,9 @@ public class JooqTeamMemberRepository implements TeamMemberRepository {
 		.set(Member.MEMBER.EMAIL, member.getEmail())
 		.set(Member.MEMBER.HIRE_DATE, member.getHireDate())
 		.set(Member.MEMBER.PHOTO_URL, member.getPhotoUrl())
+		.set(Member.MEMBER.TEAM_ID, member.getTeamID())
+		.set(Member.MEMBER.PHONE_NUMBER, member.getPhoneNumber())
+		.set(Member.MEMBER.SKYPE, member.getSkype())
 		.returning(Member.MEMBER.ID)
 		.fetchOne();
 		LOGGER.debug("Calling createMember() returned={}", record.getId());
@@ -90,6 +93,7 @@ public class JooqTeamMemberRepository implements TeamMemberRepository {
 		.set(Member.MEMBER.EMAIL, member.getEmail())
 		.set(Member.MEMBER.HIRE_DATE, member.getHireDate())
 		.set(Member.MEMBER.PHOTO_URL, member.getPhotoUrl())
+		
 		.where(Member.MEMBER.ID.eq(member.getId())).execute();
 	}
 
