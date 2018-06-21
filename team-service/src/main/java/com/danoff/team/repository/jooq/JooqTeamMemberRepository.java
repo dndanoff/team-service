@@ -14,6 +14,8 @@ import com.danoff.team.db.Tables;
 import com.danoff.team.db.tables.Member;
 import com.danoff.team.model.TeamMember;
 
+import com.danoff.team.repository.TeamMemberRepository;
+
 @Repository
 public class JooqTeamMemberRepository implements CrudRepository<TeamMember> {
 

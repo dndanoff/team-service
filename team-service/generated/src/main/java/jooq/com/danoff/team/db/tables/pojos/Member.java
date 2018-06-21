@@ -31,6 +31,7 @@ public class Member implements Serializable {
     private String    photoUrl;
     private Long      titleId;
     private LocalDate hireDate;
+    private Long      teamId;
 
     public Member() {}
 
@@ -41,6 +42,7 @@ public class Member implements Serializable {
         this.photoUrl = value.photoUrl;
         this.titleId = value.titleId;
         this.hireDate = value.hireDate;
+        this.teamId = value.teamId;
     }
 
     public Member(
@@ -57,6 +59,7 @@ public class Member implements Serializable {
         this.photoUrl = photoUrl;
         this.titleId = titleId;
         this.hireDate = hireDate;
+        this.teamId = teamId;
     }
 
     public Long getId() {
@@ -107,6 +110,14 @@ public class Member implements Serializable {
         this.hireDate = hireDate;
     }
 
+    public Long getTeamId() {
+        return this.teamId;
+    }
+
+    public void setTeamId(Long teamId) {
+        this.teamId = teamId;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("Member (");
@@ -117,6 +128,7 @@ public class Member implements Serializable {
         sb.append(", ").append(photoUrl);
         sb.append(", ").append(titleId);
         sb.append(", ").append(hireDate);
+        sb.append(", ").append(teamId);
 
         sb.append(")");
         return sb.toString();

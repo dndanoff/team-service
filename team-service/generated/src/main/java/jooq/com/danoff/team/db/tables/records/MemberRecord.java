@@ -12,8 +12,8 @@ import javax.annotation.Generated;
 
 import org.jooq.Field;
 import org.jooq.Record1;
-import org.jooq.Record6;
-import org.jooq.Row6;
+import org.jooq.Record7;
+import org.jooq.Row7;
 import org.jooq.impl.UpdatableRecordImpl;
 
 
@@ -116,6 +116,20 @@ public class MemberRecord extends UpdatableRecordImpl<MemberRecord> implements R
         return (LocalDate) get(5);
     }
 
+    /**
+     * Setter for <code>PUBLIC.MEMBER.TEAM_ID</code>.
+     */
+    public void setTeamId(Long value) {
+        set(6, value);
+    }
+
+    /**
+     * Getter for <code>PUBLIC.MEMBER.TEAM_ID</code>.
+     */
+    public Long getTeamId() {
+        return (Long) get(6);
+    }
+
     // -------------------------------------------------------------------------
     // Primary key information
     // -------------------------------------------------------------------------
@@ -129,7 +143,7 @@ public class MemberRecord extends UpdatableRecordImpl<MemberRecord> implements R
     }
 
     // -------------------------------------------------------------------------
-    // Record6 type implementation
+    // Record7 type implementation
     // -------------------------------------------------------------------------
 
     /**
@@ -200,6 +214,14 @@ public class MemberRecord extends UpdatableRecordImpl<MemberRecord> implements R
      * {@inheritDoc}
      */
     @Override
+    public Field<Long> field7() {
+        return Member.MEMBER.TEAM_ID;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public Long value1() {
         return getId();
     }
@@ -242,6 +264,14 @@ public class MemberRecord extends UpdatableRecordImpl<MemberRecord> implements R
     @Override
     public LocalDate value6() {
         return getHireDate();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Long value7() {
+        return getTeamId();
     }
 
     /**
@@ -309,6 +339,7 @@ public class MemberRecord extends UpdatableRecordImpl<MemberRecord> implements R
         value4(value4);
         value5(value5);
         value6(value6);
+        value7(value7);
         return this;
     }
 
@@ -335,5 +366,6 @@ public class MemberRecord extends UpdatableRecordImpl<MemberRecord> implements R
         set(3, photoUrl);
         set(4, titleId);
         set(5, hireDate);
+        set(6, teamId);
     }
 }

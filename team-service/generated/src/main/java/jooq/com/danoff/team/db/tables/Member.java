@@ -83,6 +83,11 @@ public class Member extends TableImpl<MemberRecord> {
     public final TableField<MemberRecord, LocalDate> HIRE_DATE = createField("HIRE_DATE", org.jooq.impl.SQLDataType.LOCALDATE.nullable(false), this, "");
 
     /**
+     * The column <code>PUBLIC.MEMBER.TEAM_ID</code>.
+     */
+    public final TableField<MemberRecord, Long> TEAM_ID = createField("TEAM_ID", org.jooq.impl.SQLDataType.BIGINT, this, "");
+
+    /**
      * Create a <code>PUBLIC.MEMBER</code> table reference
      */
     public Member() {
