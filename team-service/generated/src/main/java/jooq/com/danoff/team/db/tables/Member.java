@@ -15,6 +15,7 @@ import java.util.List;
 import javax.annotation.Generated;
 
 import org.jooq.Field;
+import org.jooq.ForeignKey;
 import org.jooq.Identity;
 import org.jooq.Schema;
 import org.jooq.Table;
@@ -36,7 +37,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Member extends TableImpl<MemberRecord> {
 
-    private static final long serialVersionUID = -424625772;
+    private static final long serialVersionUID = -988384645;
 
     /**
      * The reference instance of <code>PUBLIC.MEMBER</code>
@@ -80,6 +81,11 @@ public class Member extends TableImpl<MemberRecord> {
      * The column <code>PUBLIC.MEMBER.HIRE_DATE</code>.
      */
     public final TableField<MemberRecord, LocalDate> HIRE_DATE = createField("HIRE_DATE", org.jooq.impl.SQLDataType.LOCALDATE.nullable(false), this, "");
+
+    /**
+     * The column <code>PUBLIC.MEMBER.TEAM_ID</code>.
+     */
+    public final TableField<MemberRecord, Long> TEAM_ID = createField("TEAM_ID", org.jooq.impl.SQLDataType.BIGINT, this, "");
 
     /**
      * Create a <code>PUBLIC.MEMBER</code> table reference
@@ -133,6 +139,14 @@ public class Member extends TableImpl<MemberRecord> {
     @Override
     public List<UniqueKey<MemberRecord>> getKeys() {
         return Arrays.<UniqueKey<MemberRecord>>asList(Keys.MEMBER_PK, Keys.CONSTRAINT_8);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<ForeignKey<MemberRecord, ?>> getReferences() {
+        return Arrays.<ForeignKey<MemberRecord, ?>>asList(Keys.CONSTRAINT_87);
     }
 
     /**

@@ -6,11 +6,14 @@ package com.danoff.team.db;
 
 import com.danoff.team.db.tables.Databasechangeloglock;
 import com.danoff.team.db.tables.Member;
+import com.danoff.team.db.tables.Team;
 import com.danoff.team.db.tables.records.DatabasechangeloglockRecord;
 import com.danoff.team.db.tables.records.MemberRecord;
+import com.danoff.team.db.tables.records.TeamRecord;
 
 import javax.annotation.Generated;
 
+import org.jooq.ForeignKey;
 import org.jooq.Identity;
 import org.jooq.UniqueKey;
 import org.jooq.impl.AbstractKeys;
@@ -35,6 +38,7 @@ public class Keys {
     // -------------------------------------------------------------------------
 
     public static final Identity<MemberRecord, Long> IDENTITY_MEMBER = Identities0.IDENTITY_MEMBER;
+    public static final Identity<TeamRecord, Long> IDENTITY_TEAM = Identities0.IDENTITY_TEAM;
 
     // -------------------------------------------------------------------------
     // UNIQUE and PRIMARY KEY definitions
@@ -43,11 +47,14 @@ public class Keys {
     public static final UniqueKey<DatabasechangeloglockRecord> PK_DATABASECHANGELOGLOCK = UniqueKeys0.PK_DATABASECHANGELOGLOCK;
     public static final UniqueKey<MemberRecord> MEMBER_PK = UniqueKeys0.MEMBER_PK;
     public static final UniqueKey<MemberRecord> CONSTRAINT_8 = UniqueKeys0.CONSTRAINT_8;
+    public static final UniqueKey<TeamRecord> TEAM_PK = UniqueKeys0.TEAM_PK;
+    public static final UniqueKey<TeamRecord> CONSTRAINT_2 = UniqueKeys0.CONSTRAINT_2;
 
     // -------------------------------------------------------------------------
     // FOREIGN KEY definitions
     // -------------------------------------------------------------------------
 
+    public static final ForeignKey<MemberRecord, TeamRecord> CONSTRAINT_87 = ForeignKeys0.CONSTRAINT_87;
 
     // -------------------------------------------------------------------------
     // [#1459] distribute members to avoid static initialisers > 64kb
@@ -55,11 +62,18 @@ public class Keys {
 
     private static class Identities0 extends AbstractKeys {
         public static Identity<MemberRecord, Long> IDENTITY_MEMBER = createIdentity(Member.MEMBER, Member.MEMBER.ID);
+        public static Identity<TeamRecord, Long> IDENTITY_TEAM = createIdentity(Team.TEAM, Team.TEAM.ID);
     }
 
     private static class UniqueKeys0 extends AbstractKeys {
         public static final UniqueKey<DatabasechangeloglockRecord> PK_DATABASECHANGELOGLOCK = createUniqueKey(Databasechangeloglock.DATABASECHANGELOGLOCK, "PK_DATABASECHANGELOGLOCK", Databasechangeloglock.DATABASECHANGELOGLOCK.ID);
         public static final UniqueKey<MemberRecord> MEMBER_PK = createUniqueKey(Member.MEMBER, "MEMBER_PK", Member.MEMBER.ID);
         public static final UniqueKey<MemberRecord> CONSTRAINT_8 = createUniqueKey(Member.MEMBER, "CONSTRAINT_8", Member.MEMBER.EMAIL);
+        public static final UniqueKey<TeamRecord> TEAM_PK = createUniqueKey(Team.TEAM, "TEAM_PK", Team.TEAM.ID);
+        public static final UniqueKey<TeamRecord> CONSTRAINT_2 = createUniqueKey(Team.TEAM, "CONSTRAINT_2", Team.TEAM.NAME);
+    }
+
+    private static class ForeignKeys0 extends AbstractKeys {
+        public static final ForeignKey<MemberRecord, TeamRecord> CONSTRAINT_87 = createForeignKey(com.danoff.team.db.Keys.TEAM_PK, Member.MEMBER, "CONSTRAINT_87", Member.MEMBER.TEAM_ID);
     }
 }

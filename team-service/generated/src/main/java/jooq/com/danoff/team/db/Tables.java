@@ -7,6 +7,7 @@ package com.danoff.team.db;
 import com.danoff.team.db.tables.Databasechangelog;
 import com.danoff.team.db.tables.Databasechangeloglock;
 import com.danoff.team.db.tables.Member;
+import com.danoff.team.db.tables.Team;
 
 import javax.annotation.Generated;
 
@@ -38,4 +39,9 @@ public class Tables {
      * The table <code>PUBLIC.MEMBER</code>.
      */
     public static final Member MEMBER = com.danoff.team.db.tables.Member.MEMBER;
+
+    /**
+     * The table <code>PUBLIC.TEAM</code>.
+     */
+    public static final Team TEAM = com.danoff.team.db.tables.Team.TEAM;
 }

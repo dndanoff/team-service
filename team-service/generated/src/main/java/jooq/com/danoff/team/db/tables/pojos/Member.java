@@ -23,7 +23,7 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Member implements Serializable {
 
-    private static final long serialVersionUID = 584261329;
+    private static final long serialVersionUID = -1068705713;
 
     private Long      id;
     private String    email;
@@ -31,6 +31,7 @@ public class Member implements Serializable {
     private String    lastName;
     private String    photoUrl;
     private LocalDate hireDate;
+    private Long      teamId;
 
     public Member() {}
 
@@ -41,6 +42,7 @@ public class Member implements Serializable {
         this.lastName = value.lastName;
         this.photoUrl = value.photoUrl;
         this.hireDate = value.hireDate;
+        this.teamId = value.teamId;
     }
 
     public Member(
@@ -49,7 +51,8 @@ public class Member implements Serializable {
         String    firstName,
         String    lastName,
         String    photoUrl,
-        LocalDate hireDate
+        LocalDate hireDate,
+        Long      teamId
     ) {
         this.id = id;
         this.email = email;
@@ -57,6 +60,7 @@ public class Member implements Serializable {
         this.lastName = lastName;
         this.photoUrl = photoUrl;
         this.hireDate = hireDate;
+        this.teamId = teamId;
     }
 
     public Long getId() {
@@ -107,6 +111,14 @@ public class Member implements Serializable {
         this.hireDate = hireDate;
     }
 
+    public Long getTeamId() {
+        return this.teamId;
+    }
+
+    public void setTeamId(Long teamId) {
+        this.teamId = teamId;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("Member (");
@@ -117,6 +129,7 @@ public class Member implements Serializable {
         sb.append(", ").append(lastName);
         sb.append(", ").append(photoUrl);
         sb.append(", ").append(hireDate);
+        sb.append(", ").append(teamId);
 
         sb.append(")");
         return sb.toString();

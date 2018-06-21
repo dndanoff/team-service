@@ -15,6 +15,8 @@ import com.danoff.team.mapper.TeamMemberMapper;
 import com.danoff.team.model.TeamMember;
 import com.danoff.team.repository.TeamMemberRepository;
 
+import com.danoff.team.repository.TeamMemberRepository;
+
 @Repository
 public class JooqTeamMemberRepository implements TeamMemberRepository {
 
