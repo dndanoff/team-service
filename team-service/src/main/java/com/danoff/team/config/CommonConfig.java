@@ -1,4 +1,4 @@
-package com.danoff.team;
+package com.danoff.team.config;
 
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;

@@ -1,4 +1,4 @@
-package com.danoff.common.dto;
+package com.danoff.common.dto.error;
 
 import org.springframework.http.HttpStatus;
 
@@ -7,13 +7,13 @@ public class ApiError {
 	private final HttpStatus status;
 	private final String message;
 	private final String errorInfo;
-	private final ValidationErrorDto valdiationError;
+	private final ValidationError valdiationError;
 
 	public ApiError(HttpStatus status, String message) {
 		this(status, message, null, null);
 	}
 	
-	public ApiError(HttpStatus status, String message, ValidationErrorDto valdiationError) {
+	public ApiError(HttpStatus status, String message, ValidationError valdiationError) {
 		this(status, message, null, valdiationError);
 	}
 
@@ -21,7 +21,7 @@ public class ApiError {
 		this(status, message, error, null);
 	}
 
-	public ApiError(HttpStatus status, String message, String errorInfo, ValidationErrorDto valdiationError) {
+	public ApiError(HttpStatus status, String message, String errorInfo, ValidationError valdiationError) {
 		super();
 		this.status = status;
 		this.message = message;
@@ -41,7 +41,7 @@ public class ApiError {
 		return errorInfo;
 	}
 
-	public ValidationErrorDto getValdiationError() {
+	public ValidationError getValdiationError() {
 		return valdiationError;
 	}
 }

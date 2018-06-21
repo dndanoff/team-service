@@ -1,39 +1,22 @@
 package com.danoff.team.mapper;
 
-import com.danoff.team.db.tables.records.MemberRecord;
 import com.danoff.team.dto.TeamMemberDto;
 import com.danoff.team.model.TeamMember;
+import java.util.ArrayList;
+import java.util.List;
 import javax.annotation.Generated;
 import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2018-06-08T22:36:40+0300",
+    date = "2018-06-21T22:51:08+0300",
     comments = "version: 1.2.0.Final, compiler: javac, environment: Java 1.8.0_131 (Oracle Corporation)"
 )
 @Component
 public class TeamMemberMapperImpl implements TeamMemberMapper {
 
     @Override
-    public TeamMember memberRecordToTeamMember(MemberRecord record) {
-        if ( record == null ) {
-            return null;
-        }
-
-        TeamMember teamMember = new TeamMember();
-
-        teamMember.setId( record.getId() );
-        teamMember.setEmail( record.getEmail() );
-        teamMember.setFirstName( record.getFirstName() );
-        teamMember.setLastName( record.getLastName() );
-        teamMember.setPhotoUrl( record.getPhotoUrl() );
-        teamMember.setHireDate( record.getHireDate() );
-
-        return teamMember;
-    }
-
-    @Override
-    public TeamMemberDto teamMemberToTeamMemberDto(TeamMember member) {
+    public TeamMemberDto entityToDto(TeamMember member) {
         if ( member == null ) {
             return null;
         }
@@ -41,7 +24,6 @@ public class TeamMemberMapperImpl implements TeamMemberMapper {
         TeamMemberDto teamMemberDto = new TeamMemberDto();
 
         teamMemberDto.setId( member.getId() );
-        teamMemberDto.setEmail( member.getEmail() );
         teamMemberDto.setFirstName( member.getFirstName() );
         teamMemberDto.setLastName( member.getLastName() );
         teamMemberDto.setPhotoUrl( member.getPhotoUrl() );
@@ -51,7 +33,21 @@ public class TeamMemberMapperImpl implements TeamMemberMapper {
     }
 
     @Override
-    public TeamMember teamMemberDtoToTeamMember(TeamMemberDto dto) {
+    public List<TeamMemberDto> entityToDto(List<TeamMember> members) {
+        if ( members == null ) {
+            return null;
+        }
+
+        List<TeamMemberDto> list = new ArrayList<TeamMemberDto>( members.size() );
+        for ( TeamMember teamMember : members ) {
+            list.add( entityToDto( teamMember ) );
+        }
+
+        return list;
+    }
+
+    @Override
+    public TeamMember dtoToEntity(TeamMemberDto dto) {
         if ( dto == null ) {
             return null;
         }
@@ -59,7 +55,6 @@ public class TeamMemberMapperImpl implements TeamMemberMapper {
         TeamMember teamMember = new TeamMember();
 
         teamMember.setId( dto.getId() );
-        teamMember.setEmail( dto.getEmail() );
         teamMember.setFirstName( dto.getFirstName() );
         teamMember.setLastName( dto.getLastName() );
         teamMember.setPhotoUrl( dto.getPhotoUrl() );

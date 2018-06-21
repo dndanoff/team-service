@@ -20,8 +20,8 @@ import org.springframework.web.method.annotation.MethodArgumentTypeMismatchExcep
 import org.springframework.web.multipart.support.MissingServletRequestPartException;
 import org.springframework.web.servlet.NoHandlerFoundException;
 
-import com.danoff.common.dto.ApiError;
-import com.danoff.common.dto.ValidationErrorDto;
+import com.danoff.common.dto.error.ApiError;
+import com.danoff.common.dto.error.ValidationError;
 import com.danoff.common.web.BaseRestExceptionHandler;
 
 @ControllerAdvice
@@ -34,7 +34,7 @@ public class RestExceptionHandler extends BaseRestExceptionHandler {
 		logger.info(ex.getClass().getName());
 		//
 		
-		final ValidationErrorDto validationError = new ValidationErrorDto();
+		final ValidationError validationError = new ValidationError();
         for (final FieldError fieldError : ex.getBindingResult().getFieldErrors()) {
             final String localizedErrorMessage = fieldError.getDefaultMessage();
             validationError.addFieldError(fieldError.getField(), localizedErrorMessage);

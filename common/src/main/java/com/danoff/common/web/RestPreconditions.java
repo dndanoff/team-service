@@ -1,10 +1,11 @@
 package com.danoff.common.web;
 
+import org.springframework.http.HttpStatus;
+
 import com.danoff.common.web.exception.ApiBadRequestException;
 import com.danoff.common.web.exception.ApiConflictException;
 import com.danoff.common.web.exception.ApiForbiddenException;
 import com.danoff.common.web.exception.ApiResourceNotFoundException;
-import org.springframework.http.HttpStatus;
 
 /**
  * Simple static methods to be called at the start of your own methods to verify

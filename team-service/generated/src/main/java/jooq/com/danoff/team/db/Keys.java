@@ -4,13 +4,20 @@
 package com.danoff.team.db;
 
 
+import com.danoff.team.db.tables.ContactType;
 import com.danoff.team.db.tables.Databasechangeloglock;
 import com.danoff.team.db.tables.Member;
+import com.danoff.team.db.tables.MemberContact;
+import com.danoff.team.db.tables.Title;
+import com.danoff.team.db.tables.records.ContactTypeRecord;
 import com.danoff.team.db.tables.records.DatabasechangeloglockRecord;
+import com.danoff.team.db.tables.records.MemberContactRecord;
 import com.danoff.team.db.tables.records.MemberRecord;
+import com.danoff.team.db.tables.records.TitleRecord;
 
 import javax.annotation.Generated;
 
+import org.jooq.ForeignKey;
 import org.jooq.Identity;
 import org.jooq.UniqueKey;
 import org.jooq.impl.AbstractKeys;
@@ -35,19 +42,31 @@ public class Keys {
     // -------------------------------------------------------------------------
 
     public static final Identity<MemberRecord, Long> IDENTITY_MEMBER = Identities0.IDENTITY_MEMBER;
+    public static final Identity<MemberContactRecord, Long> IDENTITY_MEMBER_CONTACT = Identities0.IDENTITY_MEMBER_CONTACT;
 
     // -------------------------------------------------------------------------
     // UNIQUE and PRIMARY KEY definitions
     // -------------------------------------------------------------------------
 
+    public static final UniqueKey<ContactTypeRecord> CONTACT_TYPE_PK = UniqueKeys0.CONTACT_TYPE_PK;
+    public static final UniqueKey<ContactTypeRecord> CONSTRAINT_D = UniqueKeys0.CONSTRAINT_D;
+    public static final UniqueKey<ContactTypeRecord> CONSTRAINT_D8 = UniqueKeys0.CONSTRAINT_D8;
     public static final UniqueKey<DatabasechangeloglockRecord> PK_DATABASECHANGELOGLOCK = UniqueKeys0.PK_DATABASECHANGELOGLOCK;
     public static final UniqueKey<MemberRecord> MEMBER_PK = UniqueKeys0.MEMBER_PK;
-    public static final UniqueKey<MemberRecord> CONSTRAINT_8 = UniqueKeys0.CONSTRAINT_8;
+    public static final UniqueKey<MemberContactRecord> MEMBER_CONTACT_PK = UniqueKeys0.MEMBER_CONTACT_PK;
+    public static final UniqueKey<MemberContactRecord> CONSTRAINT_3 = UniqueKeys0.CONSTRAINT_3;
+    public static final UniqueKey<TitleRecord> TITLE_PK = UniqueKeys0.TITLE_PK;
+    public static final UniqueKey<TitleRecord> CONSTRAINT_4 = UniqueKeys0.CONSTRAINT_4;
+    public static final UniqueKey<TitleRecord> CONSTRAINT_4C = UniqueKeys0.CONSTRAINT_4C;
+    public static final UniqueKey<TitleRecord> CONSTRAINT_4C2 = UniqueKeys0.CONSTRAINT_4C2;
 
     // -------------------------------------------------------------------------
     // FOREIGN KEY definitions
     // -------------------------------------------------------------------------
 
+    public static final ForeignKey<MemberRecord, TitleRecord> FK_TITLE = ForeignKeys0.FK_TITLE;
+    public static final ForeignKey<MemberContactRecord, MemberRecord> FK_MEMBER = ForeignKeys0.FK_MEMBER;
+    public static final ForeignKey<MemberContactRecord, ContactTypeRecord> FK_CONTACT_TYPE = ForeignKeys0.FK_CONTACT_TYPE;
 
     // -------------------------------------------------------------------------
     // [#1459] distribute members to avoid static initialisers > 64kb
@@ -55,11 +74,26 @@ public class Keys {
 
     private static class Identities0 extends AbstractKeys {
         public static Identity<MemberRecord, Long> IDENTITY_MEMBER = createIdentity(Member.MEMBER, Member.MEMBER.ID);
+        public static Identity<MemberContactRecord, Long> IDENTITY_MEMBER_CONTACT = createIdentity(MemberContact.MEMBER_CONTACT, MemberContact.MEMBER_CONTACT.ID);
     }
 
     private static class UniqueKeys0 extends AbstractKeys {
+        public static final UniqueKey<ContactTypeRecord> CONTACT_TYPE_PK = createUniqueKey(ContactType.CONTACT_TYPE, "CONTACT_TYPE_PK", ContactType.CONTACT_TYPE.ID);
+        public static final UniqueKey<ContactTypeRecord> CONSTRAINT_D = createUniqueKey(ContactType.CONTACT_TYPE, "CONSTRAINT_D", ContactType.CONTACT_TYPE.ID);
+        public static final UniqueKey<ContactTypeRecord> CONSTRAINT_D8 = createUniqueKey(ContactType.CONTACT_TYPE, "CONSTRAINT_D8", ContactType.CONTACT_TYPE.NAME);
         public static final UniqueKey<DatabasechangeloglockRecord> PK_DATABASECHANGELOGLOCK = createUniqueKey(Databasechangeloglock.DATABASECHANGELOGLOCK, "PK_DATABASECHANGELOGLOCK", Databasechangeloglock.DATABASECHANGELOGLOCK.ID);
         public static final UniqueKey<MemberRecord> MEMBER_PK = createUniqueKey(Member.MEMBER, "MEMBER_PK", Member.MEMBER.ID);
-        public static final UniqueKey<MemberRecord> CONSTRAINT_8 = createUniqueKey(Member.MEMBER, "CONSTRAINT_8", Member.MEMBER.EMAIL);
+        public static final UniqueKey<MemberContactRecord> MEMBER_CONTACT_PK = createUniqueKey(MemberContact.MEMBER_CONTACT, "MEMBER_CONTACT_PK", MemberContact.MEMBER_CONTACT.ID);
+        public static final UniqueKey<MemberContactRecord> CONSTRAINT_3 = createUniqueKey(MemberContact.MEMBER_CONTACT, "CONSTRAINT_3", MemberContact.MEMBER_CONTACT.VALUE);
+        public static final UniqueKey<TitleRecord> TITLE_PK = createUniqueKey(Title.TITLE, "TITLE_PK", Title.TITLE.ID);
+        public static final UniqueKey<TitleRecord> CONSTRAINT_4 = createUniqueKey(Title.TITLE, "CONSTRAINT_4", Title.TITLE.ID);
+        public static final UniqueKey<TitleRecord> CONSTRAINT_4C = createUniqueKey(Title.TITLE, "CONSTRAINT_4C", Title.TITLE.NAME);
+        public static final UniqueKey<TitleRecord> CONSTRAINT_4C2 = createUniqueKey(Title.TITLE, "CONSTRAINT_4C2", Title.TITLE.DESCRIPTION);
+    }
+
+    private static class ForeignKeys0 extends AbstractKeys {
+        public static final ForeignKey<MemberRecord, TitleRecord> FK_TITLE = createForeignKey(com.danoff.team.db.Keys.CONSTRAINT_4, Member.MEMBER, "FK_TITLE", Member.MEMBER.TITLE_ID);
+        public static final ForeignKey<MemberContactRecord, MemberRecord> FK_MEMBER = createForeignKey(com.danoff.team.db.Keys.MEMBER_PK, MemberContact.MEMBER_CONTACT, "FK_MEMBER", MemberContact.MEMBER_CONTACT.MEMBER_ID);
+        public static final ForeignKey<MemberContactRecord, ContactTypeRecord> FK_CONTACT_TYPE = createForeignKey(com.danoff.team.db.Keys.CONSTRAINT_D, MemberContact.MEMBER_CONTACT, "FK_CONTACT_TYPE", MemberContact.MEMBER_CONTACT.CONTACT_TYPE_ID);
     }
 }

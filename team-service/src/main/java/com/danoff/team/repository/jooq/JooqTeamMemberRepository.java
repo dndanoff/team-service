@@ -1,7 +1,7 @@
 package com.danoff.team.repository.jooq;
 
+import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.jooq.DSLContext;
 import org.slf4j.Logger;
@@ -9,92 +9,107 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.danoff.common.persistence.CrudRepository;
+import com.danoff.team.db.Tables;
 import com.danoff.team.db.tables.Member;
-import com.danoff.team.db.tables.records.MemberRecord;
-import com.danoff.team.mapper.TeamMemberMapper;
 import com.danoff.team.model.TeamMember;
-import com.danoff.team.repository.TeamMemberRepository;
 
 @Repository
-public class JooqTeamMemberRepository implements TeamMemberRepository {
+public class JooqTeamMemberRepository implements CrudRepository<TeamMember> {
 
 	private final static Logger LOGGER = LoggerFactory.getLogger(JooqTeamMemberRepository.class);
 
 	private final DSLContext create;
-	private final TeamMemberMapper mapper;
 
 	@Autowired
-	public JooqTeamMemberRepository(DSLContext dsl, TeamMemberMapper mapper) {
+	public JooqTeamMemberRepository(DSLContext dsl) {
 		this.create = dsl;
-		this.mapper = mapper;
 	}
-
+	
 	@Override
-	public List<TeamMember> findAll() {
-		LOGGER.debug("Calling findAll()");
-		List<TeamMember> result = create.selectFrom(Member.MEMBER).fetch().stream()
-				.map(r -> TeamMemberMapper.INSTANCE.memberRecordToTeamMember(r)).collect(Collectors.toList());
-		LOGGER.debug("Calling findAll() fetched={}", result);
-		return result;
-	}
-
-	@Override
-	public List<TeamMember> findPaginated(int pageSize, int pageNumber) {
-		LOGGER.debug("Calling findPaginated() with params: pageSize={}, pageNumber={}", pageSize, pageNumber);
-		List<TeamMember> result = create.selectFrom(Member.MEMBER).limit(pageSize).offset(pageNumber).fetch().stream()
-				.map(r -> mapper.memberRecordToTeamMember(r)).collect(Collectors.toList());
-		LOGGER.debug("Calling findPaginated() fetched={}", result);
-		return result;
-	}
-
-	@Override
-	public int count() {
+	public long count() {
 		LOGGER.debug("Calling count()");
-		int result = create.fetchCount(create.selectFrom(Member.MEMBER));
+		int result = create.fetchCount(create.selectFrom(Tables.MEMBER));
 		LOGGER.debug("Calling count() fetched={}", result);
 		return result;
 	}
 
 	@Override
-	public TeamMember findMember(Long id) {
+	public TeamMember findById(long id) {
 		LOGGER.debug("Calling findMember() with params: id={}", id);
-		MemberRecord record = create.fetchOne(Member.MEMBER, Member.MEMBER.ID.eq(id));
-		LOGGER.debug("Calling findMember() fetched={}", record);
-		return mapper.memberRecordToTeamMember(record);
-	}
-
-	@Override
-	public Long createMember(TeamMember member) {
-		LOGGER.debug("Calling createMember() with params: member={}", member);
-		MemberRecord record = create.insertInto(Member.MEMBER)
-		.set(Member.MEMBER.FIRST_NAME, member.getFirstName())
-		.set(Member.MEMBER.LAST_NAME, member.getLastName())
-		.set(Member.MEMBER.EMAIL, member.getEmail())
-		.set(Member.MEMBER.HIRE_DATE, member.getHireDate())
-		.set(Member.MEMBER.PHOTO_URL, member.getPhotoUrl())
-		.returning(Member.MEMBER.ID)
-		.fetchOne();
-		LOGGER.debug("Calling createMember() returned={}", record.getId());
+		if(id < 0) {
+			LOGGER.debug("Skipping findMember()");
+			return null;
+		}
 		
-		return new Long(record.getId().intValue());
+		TeamMember record = create.fetchOne(Tables.MEMBER, Member.MEMBER.ID.eq(id)).into(TeamMember.class);
+		LOGGER.debug("Calling findMember() fetched={}", record);
+		return record;
+	}
+
+	public List<TeamMember> findAll() {
+		LOGGER.debug("Calling findAll()");
+		List<TeamMember> result = create.selectFrom(Tables.MEMBER).fetch().into(TeamMember.class);
+		LOGGER.debug("Calling findAll() fetched={}", result);
+		return result;
 	}
 
 	@Override
-	public void updateMember(TeamMember member) {
+	public List<TeamMember> findPaginated(int page, int size) {
+		LOGGER.debug("Calling findPaginated() with params: page={}, size={}", page, size);
+		if(size < 0 || page < 0) {
+			LOGGER.debug("Skipping findMember()");
+			return Collections.emptyList();
+		}
+		List<TeamMember> result = create.selectFrom(Tables.MEMBER).limit(size).offset(page).fetch().into(TeamMember.class);
+		LOGGER.debug("Calling findPaginated() fetched={}", result);
+		return result;
+	}
+
+	@Override
+	public TeamMember create(TeamMember member) {
+		LOGGER.debug("Calling createMember() with params: member={}", member);
+		if(member == null) {
+			LOGGER.debug("Skipping create()");
+			return null;
+		}
+		
+		TeamMember record = create.insertInto(Tables.MEMBER)
+		.set(Tables.MEMBER.FIRST_NAME, member.getFirstName())
+		.set(Tables.MEMBER.LAST_NAME, member.getLastName())
+		.set(Tables.MEMBER.HIRE_DATE, member.getHireDate())
+		.set(Tables.MEMBER.PHOTO_URL, member.getPhotoUrl())
+		.returning(Tables.MEMBER.ID)
+		.fetchOne().into(TeamMember.class);
+		LOGGER.debug("Calling createMember() returned={}", record);
+		
+		return record;
+	}
+
+	@Override
+	public void update(TeamMember member) {
 		LOGGER.debug("Calling updateMember() with params: member={}", member);
-		create.update(Member.MEMBER)
-		.set(Member.MEMBER.FIRST_NAME, member.getFirstName())
-		.set(Member.MEMBER.LAST_NAME, member.getLastName())
-		.set(Member.MEMBER.EMAIL, member.getEmail())
-		.set(Member.MEMBER.HIRE_DATE, member.getHireDate())
-		.set(Member.MEMBER.PHOTO_URL, member.getPhotoUrl())
-		.where(Member.MEMBER.ID.eq(member.getId())).execute();
+		if(member == null) {
+			LOGGER.debug("Skipping update()");
+			return;
+		}
+		
+		create.update(Tables.MEMBER)
+		.set(Tables.MEMBER.FIRST_NAME, member.getFirstName())
+		.set(Tables.MEMBER.LAST_NAME, member.getLastName())
+		.set(Tables.MEMBER.HIRE_DATE, member.getHireDate())
+		.set(Tables.MEMBER.PHOTO_URL, member.getPhotoUrl())
+		.where(Tables.MEMBER.ID.eq(member.getId())).execute();
 	}
 
 	@Override
-	public void deleteMember(Long id) {
+	public void delete(long id) {
 		LOGGER.debug("Calling deleteMember() with params: id={}", id);
-		create.deleteFrom(Member.MEMBER).where(Member.MEMBER.ID.eq(id)).execute();
+		if(id < 0) {
+			LOGGER.debug("Skipping delete()");
+			return;
+		}
+		
+		create.deleteFrom(Tables.MEMBER).where(Tables.MEMBER.ID.eq(id)).execute();
 	}
-
 }

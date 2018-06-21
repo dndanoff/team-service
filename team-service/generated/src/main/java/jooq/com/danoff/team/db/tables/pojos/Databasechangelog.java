@@ -23,7 +23,7 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Databasechangelog implements Serializable {
 
-    private static final long serialVersionUID = -962977827;
+    private static final long serialVersionUID = -1442522955;
 
     private String        id;
     private String        author;
@@ -38,6 +38,7 @@ public class Databasechangelog implements Serializable {
     private String        liquibase;
     private String        contexts;
     private String        labels;
+    private String        deploymentId;
 
     public Databasechangelog() {}
 
@@ -55,6 +56,7 @@ public class Databasechangelog implements Serializable {
         this.liquibase = value.liquibase;
         this.contexts = value.contexts;
         this.labels = value.labels;
+        this.deploymentId = value.deploymentId;
     }
 
     public Databasechangelog(
@@ -70,7 +72,8 @@ public class Databasechangelog implements Serializable {
         String        tag,
         String        liquibase,
         String        contexts,
-        String        labels
+        String        labels,
+        String        deploymentId
     ) {
         this.id = id;
         this.author = author;
@@ -85,6 +88,7 @@ public class Databasechangelog implements Serializable {
         this.liquibase = liquibase;
         this.contexts = contexts;
         this.labels = labels;
+        this.deploymentId = deploymentId;
     }
 
     public String getId() {
@@ -191,6 +195,14 @@ public class Databasechangelog implements Serializable {
         this.labels = labels;
     }
 
+    public String getDeploymentId() {
+        return this.deploymentId;
+    }
+
+    public void setDeploymentId(String deploymentId) {
+        this.deploymentId = deploymentId;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("Databasechangelog (");
@@ -208,6 +220,7 @@ public class Databasechangelog implements Serializable {
         sb.append(", ").append(liquibase);
         sb.append(", ").append(contexts);
         sb.append(", ").append(labels);
+        sb.append(", ").append(deploymentId);
 
         sb.append(")");
         return sb.toString();

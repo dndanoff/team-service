@@ -5,7 +5,12 @@ package com.danoff.common.web.exception;
  */
 public class ApiValidationException extends RuntimeException {
 
-    public ApiValidationException(final String message) {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -2923744634250856612L;
+
+	public ApiValidationException(final String message) {
         super(message);
     }
 

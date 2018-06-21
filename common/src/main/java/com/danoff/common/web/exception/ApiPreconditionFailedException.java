@@ -2,7 +2,12 @@ package com.danoff.common.web.exception;
 
 public final class ApiPreconditionFailedException extends RuntimeException {
 
-    public ApiPreconditionFailedException() {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -3029559070492115264L;
+
+	public ApiPreconditionFailedException() {
         super();
     }
 

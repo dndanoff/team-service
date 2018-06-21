@@ -2,7 +2,12 @@ package com.danoff.common.web.exception;
 
 public final class ApiBadRequestException extends RuntimeException {
 
-    public ApiBadRequestException() {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -4016950916785573924L;
+
+	public ApiBadRequestException() {
         super();
     }
 

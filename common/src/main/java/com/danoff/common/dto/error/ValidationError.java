@@ -1,24 +1,24 @@
-package com.danoff.common.dto;
+package com.danoff.common.dto.error;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ValidationErrorDto {
+public class ValidationError {
 
-    private final List<FieldErrorDto> fieldErrors = new ArrayList<FieldErrorDto>();
+    private final List<FieldError> fieldErrors = new ArrayList<FieldError>();
 
-    public ValidationErrorDto() {
+    public ValidationError() {
         super();
     }
 
     //
 
     public final void addFieldError(final String path, final String message) {
-        final FieldErrorDto error = new FieldErrorDto(path, message);
+        final FieldError error = new FieldError(path, message);
         fieldErrors.add(error);
     }
 
-    public final List<FieldErrorDto> getFieldErrors() {
+    public final List<FieldError> getFieldErrors() {
         return fieldErrors;
     }
 

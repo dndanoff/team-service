@@ -2,7 +2,12 @@ package com.danoff.common.web.exception;
 
 public final class ApiResourceNotFoundException extends RuntimeException {
 
-    public ApiResourceNotFoundException() {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -6505720804872338761L;
+
+	public ApiResourceNotFoundException() {
         super();
     }
 

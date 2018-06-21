@@ -24,9 +24,9 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-import com.danoff.common.dto.ApiError;
-import com.danoff.common.dto.ValidationErrorDto;
-import com.danoff.common.persistence.exception.ApiEntityNotFoundException;
+import com.danoff.common.dto.error.ApiError;
+import com.danoff.common.dto.error.ValidationError;
+import com.danoff.common.persistence.exception.PersistenceEntityNotFoundException;
 import com.danoff.common.web.exception.ApiConflictException;
 import com.danoff.common.web.exception.ApiResourceNotFoundException;
 
@@ -53,7 +53,7 @@ public class BaseRestExceptionHandler extends ResponseEntityExceptionHandler {
         log.info("Bad Request: {}", ex.getMessage());
         log.debug("Bad Request: ", ex);
 		//
-        final ValidationErrorDto validationError = new ValidationErrorDto();
+        final ValidationError validationError = new ValidationError();
         for (final FieldError fieldError : ex.getBindingResult().getFieldErrors()) {
             final String localizedErrorMessage = fieldError.getDefaultMessage();
             validationError.addFieldError(fieldError.getField(), localizedErrorMessage);
@@ -69,7 +69,7 @@ public class BaseRestExceptionHandler extends ResponseEntityExceptionHandler {
         log.info("Bad Request: {}", ex.getLocalizedMessage());
         log.debug("Bad Request: ", ex);
         //
-        final ValidationErrorDto validationError = new ValidationErrorDto();
+        final ValidationError validationError = new ValidationError();
         for (final ConstraintViolation<?> violation : ex.getConstraintViolations()) {
             validationError.addFieldError(violation.getRootBeanClass().getName() + " " + violation.getPropertyPath(), violation.getMessage());
         }
@@ -101,7 +101,7 @@ public class BaseRestExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     // 404
-    @ExceptionHandler({ EntityNotFoundException.class, ApiEntityNotFoundException.class, ApiResourceNotFoundException.class })
+    @ExceptionHandler({ EntityNotFoundException.class, PersistenceEntityNotFoundException.class, ApiResourceNotFoundException.class })
     protected ResponseEntity<Object> handleNotFound(final RuntimeException ex, final WebRequest request) {
         log.warn("Not Found: {}", ex.getMessage());
         //

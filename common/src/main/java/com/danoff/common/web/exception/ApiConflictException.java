@@ -2,7 +2,12 @@ package com.danoff.common.web.exception;
 
 public final class ApiConflictException extends RuntimeException {
 
-    public ApiConflictException() {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -7390158891420056061L;
+
+	public ApiConflictException() {
         super();
     }
 

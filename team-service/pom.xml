@@ -25,7 +25,7 @@
 		<swagger.version>2.6.1</swagger.version>
 		<mapstruct.version>1.2.0.Final</mapstruct.version>
 		<lombok.version>1.16.14</lombok.version>
-		<liquibase.plugin.version>3.4.1</liquibase.plugin.version>
+		<liquibase.plugin.version>3.6.1</liquibase.plugin.version>
 		<dockerfile-maven.version>1.4.0</dockerfile-maven.version>
 		<spring-cloud.version>Camden.SR7</spring-cloud.version>
 	</properties>
@@ -191,6 +191,7 @@
 						<configuration>
 							<propertyFile>${project.basedir}/src/main/resources/db/liquibase-plugin.properties</propertyFile>
 							<promptOnNonLocalDatabase>false</promptOnNonLocalDatabase>
+							<verbose>true</verbose>
 						</configuration>
 					</plugin>
 					<plugin>

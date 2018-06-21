@@ -23,39 +23,39 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Member implements Serializable {
 
-    private static final long serialVersionUID = 584261329;
+    private static final long serialVersionUID = 734579394;
 
     private Long      id;
-    private String    email;
     private String    firstName;
     private String    lastName;
     private String    photoUrl;
+    private Long      titleId;
     private LocalDate hireDate;
 
     public Member() {}
 
     public Member(Member value) {
         this.id = value.id;
-        this.email = value.email;
         this.firstName = value.firstName;
         this.lastName = value.lastName;
         this.photoUrl = value.photoUrl;
+        this.titleId = value.titleId;
         this.hireDate = value.hireDate;
     }
 
     public Member(
         Long      id,
-        String    email,
         String    firstName,
         String    lastName,
         String    photoUrl,
+        Long      titleId,
         LocalDate hireDate
     ) {
         this.id = id;
-        this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
         this.photoUrl = photoUrl;
+        this.titleId = titleId;
         this.hireDate = hireDate;
     }
 
@@ -65,14 +65,6 @@ public class Member implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getEmail() {
-        return this.email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     public String getFirstName() {
@@ -99,6 +91,14 @@ public class Member implements Serializable {
         this.photoUrl = photoUrl;
     }
 
+    public Long getTitleId() {
+        return this.titleId;
+    }
+
+    public void setTitleId(Long titleId) {
+        this.titleId = titleId;
+    }
+
     public LocalDate getHireDate() {
         return this.hireDate;
     }
@@ -112,10 +112,10 @@ public class Member implements Serializable {
         StringBuilder sb = new StringBuilder("Member (");
 
         sb.append(id);
-        sb.append(", ").append(email);
         sb.append(", ").append(firstName);
         sb.append(", ").append(lastName);
         sb.append(", ").append(photoUrl);
+        sb.append(", ").append(titleId);
         sb.append(", ").append(hireDate);
 
         sb.append(")");

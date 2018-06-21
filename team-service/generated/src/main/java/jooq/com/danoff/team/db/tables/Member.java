@@ -15,6 +15,7 @@ import java.util.List;
 import javax.annotation.Generated;
 
 import org.jooq.Field;
+import org.jooq.ForeignKey;
 import org.jooq.Identity;
 import org.jooq.Schema;
 import org.jooq.Table;
@@ -36,7 +37,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Member extends TableImpl<MemberRecord> {
 
-    private static final long serialVersionUID = -424625772;
+    private static final long serialVersionUID = 724002514;
 
     /**
      * The reference instance of <code>PUBLIC.MEMBER</code>
@@ -57,11 +58,6 @@ public class Member extends TableImpl<MemberRecord> {
     public final TableField<MemberRecord, Long> ID = createField("ID", org.jooq.impl.SQLDataType.BIGINT.nullable(false), this, "");
 
     /**
-     * The column <code>PUBLIC.MEMBER.EMAIL</code>.
-     */
-    public final TableField<MemberRecord, String> EMAIL = createField("EMAIL", org.jooq.impl.SQLDataType.VARCHAR.length(100).nullable(false), this, "");
-
-    /**
      * The column <code>PUBLIC.MEMBER.FIRST_NAME</code>.
      */
     public final TableField<MemberRecord, String> FIRST_NAME = createField("FIRST_NAME", org.jooq.impl.SQLDataType.VARCHAR.length(100).nullable(false), this, "");
@@ -75,6 +71,11 @@ public class Member extends TableImpl<MemberRecord> {
      * The column <code>PUBLIC.MEMBER.PHOTO_URL</code>.
      */
     public final TableField<MemberRecord, String> PHOTO_URL = createField("PHOTO_URL", org.jooq.impl.SQLDataType.VARCHAR.length(1000), this, "");
+
+    /**
+     * The column <code>PUBLIC.MEMBER.TITLE_ID</code>.
+     */
+    public final TableField<MemberRecord, Long> TITLE_ID = createField("TITLE_ID", org.jooq.impl.SQLDataType.BIGINT.nullable(false), this, "");
 
     /**
      * The column <code>PUBLIC.MEMBER.HIRE_DATE</code>.
@@ -132,7 +133,15 @@ public class Member extends TableImpl<MemberRecord> {
      */
     @Override
     public List<UniqueKey<MemberRecord>> getKeys() {
-        return Arrays.<UniqueKey<MemberRecord>>asList(Keys.MEMBER_PK, Keys.CONSTRAINT_8);
+        return Arrays.<UniqueKey<MemberRecord>>asList(Keys.MEMBER_PK);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<ForeignKey<MemberRecord, ?>> getReferences() {
+        return Arrays.<ForeignKey<MemberRecord, ?>>asList(Keys.FK_TITLE);
     }
 
     /**

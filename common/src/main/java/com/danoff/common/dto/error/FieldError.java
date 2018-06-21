@@ -1,12 +1,12 @@
-package com.danoff.common.dto;
+package com.danoff.common.dto.error;
 
-public class FieldErrorDto {
+public class FieldError {
 
     private final String field;
 
     private final String message;
 
-    public FieldErrorDto(final String field, final String message) {
+    public FieldError(final String field, final String message) {
         this.field = field;
         this.message = message;
     }
