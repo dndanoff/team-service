@@ -3,6 +3,10 @@ body {
     padding-top: 65px; 
 }
 
+#employee{
+	text-align:left;
+}
+
 @media (max-width: 576px) {
     .card-columns {
         column-count: 1;

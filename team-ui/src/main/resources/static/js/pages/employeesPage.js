@@ -1,4 +1,4 @@
-class TeamList extends React.Component {
+class EmployeesPage extends React.Component {
 	  constructor(props) {
 	    super(props);
 	    this.handleSearch = this.handleSearch.bind(this);
@@ -66,17 +66,23 @@ class TeamList extends React.Component {
 	  }
 	  	
 	  render() {
+		  if(!this.isEmpty(this.state.error)){
+			  return (
+				<div id="error" class="alert alert-warning" role="alert">
+	  				{this.state.error}
+	    		</div>
+    		);
+		  }
+		  
+		  
 		let cols = [];
 		for (var i = 0; i < this.state.employees.length; i++) {
-			cols.push(<Employee key={i} info={this.state.employees[i]}/>);
+			cols.push(<EmployeeCard key={this.state.employees[i].id} info={this.state.employees[i]}/>);
 		}
 		  
 	    return (
 	    	<div id="employees-page">
 	    		<Search onSearch={this.handleSearch}/>
-	    		<div id="error" class="row">
-	    			{this.state.error}
-	    		</div>
 		    	<div id="employees" class="row">
 					<div class="card-columns">
 						{cols}

@@ -16,9 +16,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 import com.danoff.common.dto.IDto;
+import com.danoff.common.dto.views.DtoView;
 import com.danoff.common.model.IEntity;
 import com.danoff.common.service.IService;
 import com.danoff.common.web.RestPreconditions;
+import com.fasterxml.jackson.annotation.JsonView;
 
 public abstract class AbstractReadOnlyController <D extends IDto, E extends IEntity> {
 	
@@ -45,6 +47,7 @@ public abstract class AbstractReadOnlyController <D extends IDto, E extends IEnt
         return getService().count();
     }
     
+    @JsonView(DtoView.Aggregated.class)
     @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseStatus(value = HttpStatus.OK)
 	public List<D> findResourcesPaginated(
@@ -56,6 +59,7 @@ public abstract class AbstractReadOnlyController <D extends IDto, E extends IEnt
 	
     protected abstract List<D> findResourcesPaginatedInternal(int page, int size) ;
     
+    @JsonView(DtoView.Detailed.class)
     @RequestMapping(value="/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseStatus(value = HttpStatus.OK)
     public D findOneResource(@PathVariable final Long id) {

@@ -8,13 +8,16 @@ class App extends React.Component {
     this.state = {};
   }
 
+  
+  
   render() {
     return (
     	<BrowserRouter>
 			<div class="container">
 				<Menu />
 				<div className="content">
-		            <Route exact path="/" render={(props) => <TeamList {...props} pageSize={15}/>}/>
+		            <Route exact path="/" render={(props) => <EmployeesPage {...props} pageSize={15}/>}/>
+		            <Route path="/employees/:id" component={EmployeeDetailsPage}/>
 	            </div>
 			</div>
 		</BrowserRouter>

@@ -2,64 +2,58 @@ package com.danoff.team.mapper;
 
 import com.danoff.team.dto.TeamMemberDto;
 import com.danoff.team.model.TeamMember;
-import java.util.ArrayList;
-import java.util.List;
 import javax.annotation.Generated;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2018-06-21T22:51:08+0300",
+    date = "2018-06-23T00:13:33+0300",
     comments = "version: 1.2.0.Final, compiler: javac, environment: Java 1.8.0_131 (Oracle Corporation)"
 )
 @Component
 public class TeamMemberMapperImpl implements TeamMemberMapper {
 
-    @Override
-    public TeamMemberDto entityToDto(TeamMember member) {
-        if ( member == null ) {
-            return null;
-        }
-
-        TeamMemberDto teamMemberDto = new TeamMemberDto();
-
-        teamMemberDto.setId( member.getId() );
-        teamMemberDto.setFirstName( member.getFirstName() );
-        teamMemberDto.setLastName( member.getLastName() );
-        teamMemberDto.setPhotoUrl( member.getPhotoUrl() );
-        teamMemberDto.setHireDate( member.getHireDate() );
-
-        return teamMemberDto;
-    }
+    @Autowired
+    private TitleMapper titleMapper;
+    @Autowired
+    private ContactTypeMapper contactTypeMapper;
 
     @Override
-    public List<TeamMemberDto> entityToDto(List<TeamMember> members) {
-        if ( members == null ) {
-            return null;
-        }
-
-        List<TeamMemberDto> list = new ArrayList<TeamMemberDto>( members.size() );
-        for ( TeamMember teamMember : members ) {
-            list.add( entityToDto( teamMember ) );
-        }
-
-        return list;
-    }
-
-    @Override
-    public TeamMember dtoToEntity(TeamMemberDto dto) {
-        if ( dto == null ) {
+    public TeamMember dtoToEntity(TeamMemberDto arg0) {
+        if ( arg0 == null ) {
             return null;
         }
 
         TeamMember teamMember = new TeamMember();
 
-        teamMember.setId( dto.getId() );
-        teamMember.setFirstName( dto.getFirstName() );
-        teamMember.setLastName( dto.getLastName() );
-        teamMember.setPhotoUrl( dto.getPhotoUrl() );
-        teamMember.setHireDate( dto.getHireDate() );
+        teamMember.setId( arg0.getId() );
+        teamMember.setFirstName( arg0.getFirstName() );
+        teamMember.setLastName( arg0.getLastName() );
+        teamMember.setPhotoUrl( arg0.getPhotoUrl() );
+        teamMember.setHireDate( arg0.getHireDate() );
+        teamMember.setTitle( titleMapper.dtoToEntity( arg0.getTitle() ) );
+        teamMember.setContacts( contactTypeMapper.dtoToEntity( arg0.getContacts() ) );
 
         return teamMember;
+    }
+
+    @Override
+    public TeamMemberDto entityToDto(TeamMember arg0) {
+        if ( arg0 == null ) {
+            return null;
+        }
+
+        TeamMemberDto teamMemberDto = new TeamMemberDto();
+
+        teamMemberDto.setId( arg0.getId() );
+        teamMemberDto.setFirstName( arg0.getFirstName() );
+        teamMemberDto.setLastName( arg0.getLastName() );
+        teamMemberDto.setPhotoUrl( arg0.getPhotoUrl() );
+        teamMemberDto.setHireDate( arg0.getHireDate() );
+        teamMemberDto.setTitle( titleMapper.entityToDto( arg0.getTitle() ) );
+        teamMemberDto.setContacts( contactTypeMapper.entityToDto( arg0.getContacts() ) );
+
+        return teamMemberDto;
     }
 }
