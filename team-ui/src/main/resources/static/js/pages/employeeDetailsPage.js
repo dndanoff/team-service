@@ -45,35 +45,21 @@ class EmployeeDetailsPage extends React.Component {
 	  }
 	  	
 	  render() {
-		  if(!(this.state.error || 0 === this.state.error.length)){
-			  return (
+		if(!isEmpty(this.state.error)){
+			return (
 				<div id="error" class="alert alert-warning" role="alert">
-	  				{this.state.error}
-	    		</div>
-    		);
-		  }
+					{this.state.error}
+				</div>
+			);
+		}
 		  
-		  let contacts = [];
-	  		for (var i = 0; i < this.state.employee.contacts.length; i++) {
-	  			let value = <span>{this.state.employee.contacts[i].value}</span>;
-	  			if("E-MAIL" == this.state.employee.contacts[i].name.toUpperCase()){
-	  				value = <a href={"mailto:"+this.state.employee.contacts[i].value}>{this.state.employee.contacts[i].value}</a>;
-	  			}else if("MOBILE" == this.state.employee.contacts[i].name.toUpperCase()){
-	  				value = <a href={"tel:"+this.state.employee.contacts[i].value}>{this.state.employee.contacts[i].value}</a>;
-	  			}
-	  			
-	  			contacts.push(
-						<div class="row" key={this.state.employee.contacts[i].id}>
-					    	<div class="col">
-					    		{this.state.employee.contacts[i].name}
-					    	</div>
-					    	<div class="col-10">
-					    		{value}
-					    	</div>
-				    	</div>
-	  			);
-	  		}
-		  
+		let contacts = [];
+		for (var i = 0; i < this.state.employee.contacts.length; i++) {
+			contacts.push(
+				<Contact key={this.state.employee.contacts[i].id} contact={this.state.employee.contacts[i]}/>
+			);
+		}
+
 	    return (
 	    	<div id="employee-page">
 		    	<div id="employee" class="list-group list-group-flush">
@@ -83,7 +69,7 @@ class EmployeeDetailsPage extends React.Component {
 			    		<p>{this.state.employee.title.description}</p>
 			    	</div>
 			    	<div class="list-group-item flex-column align-items-start">
-				    	{contacts}
+			    		{contacts}
 			    	</div>
 			    </div>
 			</div>

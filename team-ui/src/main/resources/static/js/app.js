@@ -16,7 +16,8 @@ class App extends React.Component {
 			<div class="container">
 				<Menu />
 				<div className="content">
-		            <Route exact path="/" render={(props) => <EmployeesPage {...props} pageSize={15}/>}/>
+					<Route exact path="/" component={LandingPage}/>
+		            <Route exact path="/employees" render={(props) => <EmployeesPage {...props} pageSize={15}/>}/>
 		            <Route path="/employees/:id" component={EmployeeDetailsPage}/>
 	            </div>
 			</div>

@@ -44,7 +44,7 @@ class EmployeesPage extends React.Component {
 		input = input.toUpperCase();
 		let filteredEmployees = [];
 		
-		if(this.isEmpty(input)){
+		if(isEmpty(input)){
 			filteredEmployees = this.state.originalEmployees;
 		}else{
 			for (let i = 0; i < this.state.originalEmployees.length; i++) {
@@ -60,13 +60,9 @@ class EmployeesPage extends React.Component {
     		employees: filteredEmployees
 		}));
 	  }
-	  
-	  isEmpty(str) {
-		  return (!str || 0 === str.length);
-	  }
 	  	
 	  render() {
-		  if(!this.isEmpty(this.state.error)){
+		  if(!isEmpty(this.state.error)){
 			  return (
 				<div id="error" class="alert alert-warning" role="alert">
 	  				{this.state.error}
@@ -83,9 +79,11 @@ class EmployeesPage extends React.Component {
 	    return (
 	    	<div id="employees-page">
 	    		<Search onSearch={this.handleSearch}/>
-		    	<div id="employees" class="row">
-					<div class="card-columns">
-						{cols}
+		    	<div id="employees" class="container">
+	    			<div class="row">
+						<div class="card-columns">
+							{cols}
+						</div>
 					</div>
 				</div>
 			</div>
