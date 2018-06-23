@@ -62,7 +62,7 @@ class EmployeeDetailsPage extends React.Component {
 
 	    return (
 	    	<div id="employee-page">
-		    	<div id="employee" class="list-group list-group-flush">
+		    	<div id="employee" class="list-group list-group-flush text-left">
 			    	<div class="list-group-item flex-column align-items-start">
 			    		<img class="img-thumbnail" src={this.state.employee.photoUrl} alt={this.state.employee.firstName+" "+this.state.employee.lastName+" photo"}/>
 			    		<h2>{this.state.employee.firstName+" "+this.state.employee.lastName}</h2>

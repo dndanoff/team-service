@@ -3,8 +3,9 @@ body {
     padding-top: 65px; 
 }
 
-#employee{
-	text-align:left;
+#logo{
+	max-width: 100%;
+	height:auto
 }
 
 @media (max-width: 576px) {

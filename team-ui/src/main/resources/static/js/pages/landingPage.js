@@ -6,8 +6,8 @@ class LandingPage extends React.Component {
 
 	  render() {
 	    return (
-	  		<div class="container">
-			    <img src="https://dreamix.eu/images/new_logo.png"/>
+	  		<div class="container text-center">
+			    <img id="logo" class="img-fluid" src="/images/dreamix-logo.png"/>
 			</div>
 	    );
 	  }
