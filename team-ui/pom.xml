@@ -29,6 +29,7 @@
 		<webjars-jquery.version>3.2.1</webjars-jquery.version>
 		<webjars-react.version>16.2.0</webjars-react.version>
 		<webjars-react-router-dom.version>4.2.0</webjars-react-router-dom.version>
+		<webjars-react-redux.version>5.0.6</webjars-react-redux.version>
 	</properties>
 
 	<dependencies>
@@ -76,14 +77,19 @@
 			<version>${webjars-react.version}</version>
 		</dependency>
 		<dependency>
-		    <groupId>org.webjars.npm</groupId>
-		    <artifactId>react-dom</artifactId>
-		    <version>${webjars-react.version}</version>
+			<groupId>org.webjars.npm</groupId>
+			<artifactId>react-dom</artifactId>
+			<version>${webjars-react.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.webjars.npm</groupId>
 			<artifactId>react-router-dom</artifactId>
 			<version>${webjars-react-router-dom.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.webjars.npm</groupId>
+			<artifactId>react-redux</artifactId>
+			<version>${webjars-react-redux.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.webjars.npm</groupId>

@@ -1,21 +1,27 @@
-package com.danoff.team.config;
+package com.danoff.team.config.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	
-	private final ApplicationProperties appConfig;
+	private static final int ENCODER_STRENGTH = 16;
+	
+	private final UserDetailsService userDetailsService;
 	
 	@Autowired
-	public WebSecurityConfig(ApplicationProperties appConfig){
-		this.appConfig = appConfig;
+	public WebSecurityConfig(UserDetailsService userDetailsService){
+		this.userDetailsService = userDetailsService;
 	}
 	
     @Override
@@ -25,8 +31,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         		.disable()
         	.authorizeRequests()
         		.antMatchers("/management/info","/management/health").permitAll()
-        		.antMatchers("/members", "/swagger-ui").hasAnyRole("USER", "ADMIN")
-        		.anyRequest().hasRole("ADMIN")
+        		.antMatchers("/members", "/swagger-ui").hasAnyRole(
+        				ApplicationRoles.USER.getRoleName(),
+        				ApplicationRoles.ADMIN.getRoleName())
+        		.anyRequest().hasRole(ApplicationRoles.ADMIN.getRoleName())
         	.and()
         		.httpBasic();
         http.headers().frameOptions().disable();
@@ -34,9 +42,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication()
-                .withUser(appConfig.getAdminUsername()).password(appConfig.getAdminPassword()).roles("ADMIN","ACTUATOR")
-                .and()
-                .withUser(appConfig.getApiClientUsername()).password(appConfig.getApiClientPassword()).roles("USER");
+    	auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
+    }
+     
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+//    	return NoOpPasswordEncoder.getInstance();
+    	PasswordEncoder encoder = new BCryptPasswordEncoder(ENCODER_STRENGTH);
+        return encoder;
     }
 }

@@ -12,6 +12,7 @@
 		<js>webjar:umd/react.development.js</js>
 		<js>webjar:umd/react-dom.development.js</js>
 		<js>webjar:umd/react-router-dom.js</js>
+		<js>webjar:dist/react-redux.js</js>
 		<!-- UTILS -->
 		<js>/js/util/utils.js</js>
 	</group>
