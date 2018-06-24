@@ -10,6 +10,9 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.AuthenticationEntryPoint;
+import org.springframework.security.web.authentication.www.BasicAuthenticationEntryPoint;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
@@ -31,12 +34,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         		.disable()
         	.authorizeRequests()
         		.antMatchers("/management/info","/management/health").permitAll()
-        		.antMatchers("/members", "/swagger-ui").hasAnyRole(
+        		.antMatchers("/members/**","/titles/**","/contact-types/**", "/swagger-ui").hasAnyRole(
         				ApplicationRoles.USER.getRoleName(),
         				ApplicationRoles.ADMIN.getRoleName())
         		.anyRequest().hasRole(ApplicationRoles.ADMIN.getRoleName())
         	.and()
-        		.httpBasic();
+        		.httpBasic()
+        	.and().exceptionHandling()
+	        	.defaultAuthenticationEntryPointFor(adminAauthenticationEntryPoint(), new AntPathRequestMatcher("/management/**"))
+	        	.defaultAuthenticationEntryPointFor(generalAuthenticationEntryPoint(), new AntPathRequestMatcher("/**"));
         http.headers().frameOptions().disable();
     }
 
@@ -50,5 +56,21 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //    	return NoOpPasswordEncoder.getInstance();
     	PasswordEncoder encoder = new BCryptPasswordEncoder(ENCODER_STRENGTH);
         return encoder;
+    }
+    
+    @Bean
+    public AuthenticationEntryPoint generalAuthenticationEntryPoint(){
+        BasicAuthenticationEntryPoint entryPoint = 
+          new BasicAuthenticationEntryPoint();
+        entryPoint.setRealmName("Dreamix members' realm");
+        return entryPoint;
+    }
+    
+    @Bean
+    public AuthenticationEntryPoint adminAauthenticationEntryPoint(){
+        BasicAuthenticationEntryPoint entryPoint = 
+          new BasicAuthenticationEntryPoint();
+        entryPoint.setRealmName("Dreamix admin's realm");
+        return entryPoint;
     }
 }
