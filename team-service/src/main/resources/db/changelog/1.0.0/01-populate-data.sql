@@ -12,7 +12,15 @@ INSERT INTO CONTACT_TYPE(ID, NAME, PRIORITY) VALUES(3,'SKYPE',3);
 INSERT INTO CONTACT_TYPE(ID, NAME, PRIORITY) VALUES(4,'PERSONAL E-MAIL',DEFAULT);
 INSERT INTO CONTACT_TYPE(ID, NAME, PRIORITY) VALUES(5,'PERSONAL MOBILE',DEFAULT);
 
-INSERT INTO MEMBER(ID, FIRST_NAME, LAST_NAME, PHOTO_URL, TITLE_ID, HIRE_DATE) VALUES(1,'Denis', 'Danov', 'https://dreamix.eu/images/team/Denis_Danov_Java-Expert.jpg',5,parsedatetime('2013-07-08 10:00:00', 'yyyy-MM-dd HH:mm:ss'));
+INSERT INTO TEAM(ID, NAME, PROJECT_NAME, ROOM, ESTABLISHED_DATE) VALUES(1, 'BPM Invoice', 'BPM', 'Platform 01', parsedatetime('2013-07-08 10:00:00', 'yyyy-MM-dd HH:mm:ss'));
+INSERT INTO TEAM(ID, NAME, PROJECT_NAME, ROOM, ESTABLISHED_DATE) VALUES(2, 'BPM FO', 'BPM', 'Platform 02', parsedatetime('2013-07-08 10:00:00', 'yyyy-MM-dd HH:mm:ss'));
+INSERT INTO TEAM(ID, NAME, PROJECT_NAME, ROOM, ESTABLISHED_DATE) VALUES(3, 'Avianis', 'AvianisIntegration', 'Platform 02', parsedatetime('2013-07-08 10:00:00', 'yyyy-MM-dd HH:mm:ss'));
+INSERT INTO TEAM(ID, NAME, PROJECT_NAME, ROOM, ESTABLISHED_DATE) VALUES(4, 'MCO', 'MCO Project', '03', parsedatetime('2013-07-08 10:00:00', 'yyyy-MM-dd HH:mm:ss'));
+
+INSERT INTO MEMBER(ID, FIRST_NAME, LAST_NAME, PHOTO_URL, TITLE_ID, HIRE_DATE, TEAM_ID) VALUES(1,'Denis', 'Danov', 'https://dreamix.eu/images/team/Denis_Danov_Java-Expert.jpg',5,parsedatetime('2013-07-08 10:00:00', 'yyyy-MM-dd HH:mm:ss'),3);
+INSERT INTO MEMBER(ID, FIRST_NAME, LAST_NAME, PHOTO_URL, TITLE_ID, HIRE_DATE, TEAM_ID) VALUES(2,'Stoian', 'Ivanov', 'https://dreamix.eu/images/team/Stoyan_Ivanov_Dreamix.jpg',7,parsedatetime('2016-01-04 10:00:00', 'yyyy-MM-dd HH:mm:ss'),3);
+INSERT INTO MEMBER(ID, FIRST_NAME, LAST_NAME, PHOTO_URL, TITLE_ID, HIRE_DATE, TEAM_ID) VALUES(3,'Valeri', 'Borisov', 'https://dreamix.eu/images/team/Valery_Borisov_Dreamix.jpg',5,parsedatetime('2010-07-08 10:00:00', 'yyyy-MM-dd HH:mm:ss'), 2);
+INSERT INTO MEMBER(ID, FIRST_NAME, LAST_NAME, PHOTO_URL, TITLE_ID, HIRE_DATE, TEAM_ID) VALUES(4,'Tsvetomir', 'Petrov', 'https://dreamix.eu/images/team/Tsvetomir_Miroslavov_Oracle-&-Java-Developer.jpg',1,parsedatetime('2013-07-08 10:00:00', 'yyyy-MM-dd HH:mm:ss'), 1);
 
 INSERT INTO MEMBER_CONTACT(MEMBER_ID, CONTACT_TYPE_ID, VALUE) VALUES(1,1,'denis.danov@dreamix.eu');
 INSERT INTO MEMBER_CONTACT(MEMBER_ID, CONTACT_TYPE_ID, VALUE) VALUES(1,2,'+359 888 55 55 55');

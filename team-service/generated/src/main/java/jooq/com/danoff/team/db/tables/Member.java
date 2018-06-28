@@ -37,7 +37,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Member extends TableImpl<MemberRecord> {
 
-    private static final long serialVersionUID = 724002514;
+    private static final long serialVersionUID = 882623168;
 
     /**
      * The reference instance of <code>PUBLIC.MEMBER</code>
@@ -86,16 +86,6 @@ public class Member extends TableImpl<MemberRecord> {
      * The column <code>PUBLIC.MEMBER.TEAM_ID</code>.
      */
     public final TableField<MemberRecord, Long> TEAM_ID = createField("TEAM_ID", org.jooq.impl.SQLDataType.BIGINT, this, "");
-
-    /**
-     * The column <code>PUBLIC.MEMBER.PHONE_NUMBER</code>.
-     */
-    public final TableField<MemberRecord, String> PHONE_NUMBER = createField("PHONE_NUMBER", org.jooq.impl.SQLDataType.VARCHAR.length(2147483647), this, "");
-
-    /**
-     * The column <code>PUBLIC.MEMBER.SKYPE</code>.
-     */
-    public final TableField<MemberRecord, String> SKYPE = createField("SKYPE", org.jooq.impl.SQLDataType.VARCHAR.length(2147483647), this, "");
 
     /**
      * Create a <code>PUBLIC.MEMBER</code> table reference
@@ -156,7 +146,7 @@ public class Member extends TableImpl<MemberRecord> {
      */
     @Override
     public List<ForeignKey<MemberRecord, ?>> getReferences() {
-        return Arrays.<ForeignKey<MemberRecord, ?>>asList(Keys.FK_TITLE);
+        return Arrays.<ForeignKey<MemberRecord, ?>>asList(Keys.FK_TITLE, Keys.FK_TEAM);
     }
 
     /**

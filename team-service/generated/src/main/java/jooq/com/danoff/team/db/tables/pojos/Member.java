@@ -23,7 +23,7 @@ import javax.annotation.Generated;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Member implements Serializable {
 
-    private static final long serialVersionUID = 734579394;
+    private static final long serialVersionUID = -986933848;
 
     private Long      id;
     private String    firstName;
@@ -32,8 +32,6 @@ public class Member implements Serializable {
     private Long      titleId;
     private LocalDate hireDate;
     private Long      teamId;
-    private String    phoneNumber;
-    private String    skype;
 
     public Member() {}
 
@@ -45,8 +43,6 @@ public class Member implements Serializable {
         this.titleId = value.titleId;
         this.hireDate = value.hireDate;
         this.teamId = value.teamId;
-        this.phoneNumber = value.phoneNumber;
-        this.skype = value.skype;
     }
 
     public Member(
@@ -55,7 +51,8 @@ public class Member implements Serializable {
         String    lastName,
         String    photoUrl,
         Long      titleId,
-        LocalDate hireDate
+        LocalDate hireDate,
+        Long      teamId
     ) {
         this.id = id;
         this.firstName = firstName;
@@ -64,8 +61,6 @@ public class Member implements Serializable {
         this.titleId = titleId;
         this.hireDate = hireDate;
         this.teamId = teamId;
-        this.phoneNumber = phoneNumber;
-        this.skype = skype;
     }
 
     public Long getId() {
@@ -124,22 +119,6 @@ public class Member implements Serializable {
         this.teamId = teamId;
     }
 
-    public String getPhoneNumber() {
-        return this.phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
-    public String getSkype() {
-        return this.skype;
-    }
-
-    public void setSkype(String skype) {
-        this.skype = skype;
-    }
-
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("Member (");
@@ -151,8 +130,6 @@ public class Member implements Serializable {
         sb.append(", ").append(titleId);
         sb.append(", ").append(hireDate);
         sb.append(", ").append(teamId);
-        sb.append(", ").append(phoneNumber);
-        sb.append(", ").append(skype);
 
         sb.append(")");
         return sb.toString();

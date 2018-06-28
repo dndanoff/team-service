@@ -1,0 +1,2 @@
+mvn clean install -Pgenerate-sources -Dmaven.test.skip=true
+mvn liquibase:update -Pgenerate-sources

@@ -25,7 +25,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         		.disable()
         	.authorizeRequests()
         		.antMatchers("/management/info","/management/health").permitAll()
-        		.antMatchers("/members", "/swagger-ui").permitAll()//hasAnyRole("USER", "ADMIN")
+        		.antMatchers("/members", "/swagger-ui", "/teams").permitAll()//hasAnyRole("USER", "ADMIN")
         		.anyRequest().hasRole("ADMIN")
         	.and()
         		.httpBasic();

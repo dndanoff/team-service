@@ -8,11 +8,13 @@ import com.danoff.team.db.tables.ContactType;
 import com.danoff.team.db.tables.Databasechangeloglock;
 import com.danoff.team.db.tables.Member;
 import com.danoff.team.db.tables.MemberContact;
+import com.danoff.team.db.tables.Team;
 import com.danoff.team.db.tables.Title;
 import com.danoff.team.db.tables.records.ContactTypeRecord;
 import com.danoff.team.db.tables.records.DatabasechangeloglockRecord;
 import com.danoff.team.db.tables.records.MemberContactRecord;
 import com.danoff.team.db.tables.records.MemberRecord;
+import com.danoff.team.db.tables.records.TeamRecord;
 import com.danoff.team.db.tables.records.TitleRecord;
 
 import javax.annotation.Generated;
@@ -43,6 +45,7 @@ public class Keys {
 
     public static final Identity<MemberRecord, Long> IDENTITY_MEMBER = Identities0.IDENTITY_MEMBER;
     public static final Identity<MemberContactRecord, Long> IDENTITY_MEMBER_CONTACT = Identities0.IDENTITY_MEMBER_CONTACT;
+    public static final Identity<TeamRecord, Long> IDENTITY_TEAM = Identities0.IDENTITY_TEAM;
 
     // -------------------------------------------------------------------------
     // UNIQUE and PRIMARY KEY definitions
@@ -55,6 +58,8 @@ public class Keys {
     public static final UniqueKey<MemberRecord> MEMBER_PK = UniqueKeys0.MEMBER_PK;
     public static final UniqueKey<MemberContactRecord> MEMBER_CONTACT_PK = UniqueKeys0.MEMBER_CONTACT_PK;
     public static final UniqueKey<MemberContactRecord> CONSTRAINT_3 = UniqueKeys0.CONSTRAINT_3;
+    public static final UniqueKey<TeamRecord> TEAM_PK = UniqueKeys0.TEAM_PK;
+    public static final UniqueKey<TeamRecord> CONSTRAINT_2 = UniqueKeys0.CONSTRAINT_2;
     public static final UniqueKey<TitleRecord> TITLE_PK = UniqueKeys0.TITLE_PK;
     public static final UniqueKey<TitleRecord> CONSTRAINT_4 = UniqueKeys0.CONSTRAINT_4;
     public static final UniqueKey<TitleRecord> CONSTRAINT_4C = UniqueKeys0.CONSTRAINT_4C;
@@ -65,6 +70,7 @@ public class Keys {
     // -------------------------------------------------------------------------
 
     public static final ForeignKey<MemberRecord, TitleRecord> FK_TITLE = ForeignKeys0.FK_TITLE;
+    public static final ForeignKey<MemberRecord, TeamRecord> FK_TEAM = ForeignKeys0.FK_TEAM;
     public static final ForeignKey<MemberContactRecord, MemberRecord> FK_MEMBER = ForeignKeys0.FK_MEMBER;
     public static final ForeignKey<MemberContactRecord, ContactTypeRecord> FK_CONTACT_TYPE = ForeignKeys0.FK_CONTACT_TYPE;
 
@@ -75,6 +81,7 @@ public class Keys {
     private static class Identities0 extends AbstractKeys {
         public static Identity<MemberRecord, Long> IDENTITY_MEMBER = createIdentity(Member.MEMBER, Member.MEMBER.ID);
         public static Identity<MemberContactRecord, Long> IDENTITY_MEMBER_CONTACT = createIdentity(MemberContact.MEMBER_CONTACT, MemberContact.MEMBER_CONTACT.ID);
+        public static Identity<TeamRecord, Long> IDENTITY_TEAM = createIdentity(Team.TEAM, Team.TEAM.ID);
     }
 
     private static class UniqueKeys0 extends AbstractKeys {
@@ -85,6 +92,8 @@ public class Keys {
         public static final UniqueKey<MemberRecord> MEMBER_PK = createUniqueKey(Member.MEMBER, "MEMBER_PK", Member.MEMBER.ID);
         public static final UniqueKey<MemberContactRecord> MEMBER_CONTACT_PK = createUniqueKey(MemberContact.MEMBER_CONTACT, "MEMBER_CONTACT_PK", MemberContact.MEMBER_CONTACT.ID);
         public static final UniqueKey<MemberContactRecord> CONSTRAINT_3 = createUniqueKey(MemberContact.MEMBER_CONTACT, "CONSTRAINT_3", MemberContact.MEMBER_CONTACT.VALUE);
+        public static final UniqueKey<TeamRecord> TEAM_PK = createUniqueKey(Team.TEAM, "TEAM_PK", Team.TEAM.ID);
+        public static final UniqueKey<TeamRecord> CONSTRAINT_2 = createUniqueKey(Team.TEAM, "CONSTRAINT_2", Team.TEAM.NAME);
         public static final UniqueKey<TitleRecord> TITLE_PK = createUniqueKey(Title.TITLE, "TITLE_PK", Title.TITLE.ID);
         public static final UniqueKey<TitleRecord> CONSTRAINT_4 = createUniqueKey(Title.TITLE, "CONSTRAINT_4", Title.TITLE.ID);
         public static final UniqueKey<TitleRecord> CONSTRAINT_4C = createUniqueKey(Title.TITLE, "CONSTRAINT_4C", Title.TITLE.NAME);
@@ -93,6 +102,7 @@ public class Keys {
 
     private static class ForeignKeys0 extends AbstractKeys {
         public static final ForeignKey<MemberRecord, TitleRecord> FK_TITLE = createForeignKey(com.danoff.team.db.Keys.CONSTRAINT_4, Member.MEMBER, "FK_TITLE", Member.MEMBER.TITLE_ID);
+        public static final ForeignKey<MemberRecord, TeamRecord> FK_TEAM = createForeignKey(com.danoff.team.db.Keys.TEAM_PK, Member.MEMBER, "FK_TEAM", Member.MEMBER.TEAM_ID);
         public static final ForeignKey<MemberContactRecord, MemberRecord> FK_MEMBER = createForeignKey(com.danoff.team.db.Keys.MEMBER_PK, MemberContact.MEMBER_CONTACT, "FK_MEMBER", MemberContact.MEMBER_CONTACT.MEMBER_ID);
         public static final ForeignKey<MemberContactRecord, ContactTypeRecord> FK_CONTACT_TYPE = createForeignKey(com.danoff.team.db.Keys.CONSTRAINT_D, MemberContact.MEMBER_CONTACT, "FK_CONTACT_TYPE", MemberContact.MEMBER_CONTACT.CONTACT_TYPE_ID);
     }

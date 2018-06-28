@@ -3,7 +3,7 @@ import { Card, Icon, Image, Button } from 'semantic-ui-react'
 
 const member = ( props ) => {
     return (
-        <Card>
+        <Card key={props.id}>
         <Image src={ props.photoUrl } />
         <Card.Content>
           <Card.Header>{ props.firstName }</Card.Header>

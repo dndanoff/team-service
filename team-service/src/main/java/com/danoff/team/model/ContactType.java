@@ -14,4 +14,5 @@ public class ContactType implements IEntity{
 	private Long id;
 	private String name;
 	private Integer priority;
+	private String value; 
 }

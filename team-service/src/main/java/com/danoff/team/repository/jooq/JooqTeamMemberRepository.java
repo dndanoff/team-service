@@ -1,9 +1,14 @@
 package com.danoff.team.repository.jooq;
 
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.jooq.DSLContext;
+import org.jooq.Field;
+import org.jooq.Result;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,9 +17,13 @@ import org.springframework.stereotype.Repository;
 import com.danoff.common.persistence.CrudRepository;
 import com.danoff.team.db.Tables;
 import com.danoff.team.db.tables.Member;
+import com.danoff.team.model.ContactType;
 import com.danoff.team.model.TeamMember;
+import com.danoff.team.model.Title;
 
-import com.danoff.team.repository.TeamMemberRepository;
+
+
+
 
 @Repository
 public class JooqTeamMemberRepository implements CrudRepository<TeamMember> {
@@ -44,28 +53,77 @@ public class JooqTeamMemberRepository implements CrudRepository<TeamMember> {
 			return null;
 		}
 		
-		TeamMember record = create.fetchOne(Tables.MEMBER, Member.MEMBER.ID.eq(id)).into(TeamMember.class);
-		LOGGER.debug("Calling findMember() fetched={}", record);
-		return record;
+		Result<?> result = create.select()
+				.from(Tables.MEMBER)
+				.join(Tables.TITLE)
+				.on(Tables.TITLE.ID.eq(Tables.MEMBER.TITLE_ID))
+				.leftJoin(Tables.MEMBER_CONTACT)
+				.on(Tables.MEMBER.ID.eq(Tables.MEMBER_CONTACT.MEMBER_ID))
+				.join(Tables.CONTACT_TYPE)
+				.on(Tables.MEMBER_CONTACT.CONTACT_TYPE_ID.eq(Tables.CONTACT_TYPE.ID))
+				.where(Member.MEMBER.ID.eq(id))
+				.fetch();
+		
+		TeamMember member =  result.into(Tables.MEMBER.fields()).into(TeamMember.class).stream().findFirst().orElse(null);
+		if(member == null) {
+			return null;
+		}
+		
+		member.setTitle(result.into(Tables.TITLE.fields()).into(Title.class).stream().findFirst().orElse(null));
+		member.setContacts(result
+				.into(expandFields(Tables.CONTACT_TYPE.fields(),
+						Tables.MEMBER_CONTACT.field(Tables.MEMBER_CONTACT.VALUE.getName())))
+				.into(ContactType.class).stream().sorted(Comparator.comparing(ContactType::getPriority))
+				.collect(Collectors.toList()));
+
+		LOGGER.debug("Calling findMember() fetched={}", member);
+		return member;
 	}
 
 	public List<TeamMember> findAll() {
 		LOGGER.debug("Calling findAll()");
-		List<TeamMember> result = create.selectFrom(Tables.MEMBER).fetch().into(TeamMember.class);
-		LOGGER.debug("Calling findAll() fetched={}", result);
-		return result;
+		Map<TeamMember, List<Title>> result = create.select()
+										.from(Tables.MEMBER)
+										.join(Tables.TITLE)
+										.on(Tables.TITLE.ID.eq(Tables.MEMBER.TITLE_ID))
+										.fetchGroups(
+									       r -> r.into(Tables.MEMBER).into(TeamMember.class),
+									       r -> r.into(Tables.TITLE).into(Title.class)
+										);
+		List<TeamMember> members =  result.entrySet()
+											.stream().map(e -> {
+												TeamMember m = e.getKey();
+												m.setTitle(e.getValue().stream().findFirst().orElse(null));
+												return m;
+											}).collect(Collectors.toList());
+		LOGGER.debug("Calling findAll() fetched={}", members);
+		return members;
 	}
 
 	@Override
 	public List<TeamMember> findPaginated(int page, int size) {
 		LOGGER.debug("Calling findPaginated() with params: page={}, size={}", page, size);
-		if(size < 0 || page < 0) {
+		if (size < 0 || page < 0) {
 			LOGGER.debug("Skipping findMember()");
 			return Collections.emptyList();
 		}
-		List<TeamMember> result = create.selectFrom(Tables.MEMBER).limit(size).offset(page).fetch().into(TeamMember.class);
-		LOGGER.debug("Calling findPaginated() fetched={}", result);
-		return result;
+		Map<TeamMember, List<Title>> result = create.select()
+													.from(Tables.MEMBER)
+													.join(Tables.TITLE)
+													.on(Tables.TITLE.ID.eq(Tables.MEMBER.TITLE_ID))
+													.limit(size).offset(page)
+													.fetchGroups(
+														r -> r.into(Tables.MEMBER).into(TeamMember.class),
+														r -> r.into(Tables.TITLE).into(Title.class)
+													);
+		List<TeamMember> members =  result.entrySet()
+											.stream().map(e -> {
+												TeamMember m = e.getKey();
+												m.setTitle(e.getValue().stream().findFirst().orElse(null));
+												return m;
+											}).collect(Collectors.toList());
+		LOGGER.debug("Calling findPaginated() fetched={}", members);
+		return members;
 	}
 
 	@Override
@@ -114,4 +172,14 @@ public class JooqTeamMemberRepository implements CrudRepository<TeamMember> {
 		
 		create.deleteFrom(Tables.MEMBER).where(Tables.MEMBER.ID.eq(id)).execute();
 	}
+	
+	private Field<?>[] expandFields(Field<?>[] fields, Field<?>... field){
+		Field<?>[] newFields = new Field[fields.length+1];
+		System.arraycopy(fields, 0, newFields, 0, fields.length);
+		for(int i=fields.length,j=0; i<newFields.length; i++,j++) {
+			newFields[i] = field[j];
+		}
+		
+		return newFields;
+}
 }

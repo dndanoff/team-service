@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2018-06-21T21:45:31+0300",
+    date = "2018-06-24T00:53:25+0300",
     comments = "version: 1.2.0.Final, compiler: javac, environment: Java 1.8.0_121 (Oracle Corporation)"
 )
 @Component
@@ -28,6 +28,7 @@ public class TeamMemberMapperImpl implements TeamMemberMapper {
         teamMemberDto.setLastName( member.getLastName() );
         teamMemberDto.setPhotoUrl( member.getPhotoUrl() );
         teamMemberDto.setHireDate( member.getHireDate() );
+        teamMemberDto.setTeamId( member.getTeamId() );
 
         return teamMemberDto;
     }
@@ -59,6 +60,7 @@ public class TeamMemberMapperImpl implements TeamMemberMapper {
         teamMember.setLastName( dto.getLastName() );
         teamMember.setPhotoUrl( dto.getPhotoUrl() );
         teamMember.setHireDate( dto.getHireDate() );
+        teamMember.setTeamId( dto.getTeamId() );
 
         return teamMember;
     }

@@ -9,6 +9,7 @@ import com.danoff.team.db.tables.Databasechangelog;
 import com.danoff.team.db.tables.Databasechangeloglock;
 import com.danoff.team.db.tables.Member;
 import com.danoff.team.db.tables.MemberContact;
+import com.danoff.team.db.tables.Team;
 import com.danoff.team.db.tables.Title;
 
 import java.util.ArrayList;
@@ -36,7 +37,7 @@ import org.jooq.impl.SchemaImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Public extends SchemaImpl {
 
-    private static final long serialVersionUID = 651496671;
+    private static final long serialVersionUID = -408814454;
 
     /**
      * The reference instance of <code>PUBLIC</code>
@@ -69,6 +70,11 @@ public class Public extends SchemaImpl {
     public final MemberContact MEMBER_CONTACT = com.danoff.team.db.tables.MemberContact.MEMBER_CONTACT;
 
     /**
+     * The table <code>PUBLIC.TEAM</code>.
+     */
+    public final Team TEAM = com.danoff.team.db.tables.Team.TEAM;
+
+    /**
      * The table <code>PUBLIC.TITLE</code>.
      */
     public final Title TITLE = com.danoff.team.db.tables.Title.TITLE;
@@ -98,8 +104,9 @@ public class Public extends SchemaImpl {
 
     private final List<Sequence<?>> getSequences0() {
         return Arrays.<Sequence<?>>asList(
-            Sequences.SYSTEM_SEQUENCE_4F79E254_AE34_4BC9_BB45_89EBC6F638F1,
-            Sequences.SYSTEM_SEQUENCE_65BBADC3_53C2_40A1_BD2D_4DC18008BDF4);
+            Sequences.SYSTEM_SEQUENCE_6A50EC6E_D7B0_4D1B_8FC0_55769240E5ED,
+            Sequences.SYSTEM_SEQUENCE_7193B32C_5777_4C28_8EE9_15E707A83BE4,
+            Sequences.SYSTEM_SEQUENCE_A96C8B72_5EDB_4728_969A_7A286D4063DC);
     }
 
     @Override
@@ -116,6 +123,7 @@ public class Public extends SchemaImpl {
             Databasechangeloglock.DATABASECHANGELOGLOCK,
             Member.MEMBER,
             MemberContact.MEMBER_CONTACT,
+            Team.TEAM,
             Title.TITLE);
     }
 }

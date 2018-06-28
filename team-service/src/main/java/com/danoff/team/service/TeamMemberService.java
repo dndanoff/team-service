@@ -5,23 +5,20 @@ import org.springframework.stereotype.Service;
 
 import com.danoff.common.persistence.CrudRepository;
 import com.danoff.common.service.AbstractIService;
-import com.danoff.team.model.TeamModel;
+import com.danoff.team.model.TeamMember;
 
 @Service
-public class TeamService extends AbstractIService<TeamModel>{
-
-	private final CrudRepository<TeamModel> repository;
+public class TeamMemberService extends AbstractIService<TeamMember>{
 	
+	private final CrudRepository<TeamMember> repository;
+
 	@Autowired
-	public TeamService(CrudRepository<TeamModel> repository) {
+	public TeamMemberService(CrudRepository<TeamMember> repository) {
 		this.repository = repository;
 	}
 
-
 	@Override
-	protected CrudRepository<TeamModel> getRepository() {
-		// TODO Auto-generated method stub
+	protected CrudRepository<TeamMember> getRepository() {
 		return repository;
 	}
-
 }

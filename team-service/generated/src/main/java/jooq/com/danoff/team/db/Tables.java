@@ -9,6 +9,7 @@ import com.danoff.team.db.tables.Databasechangelog;
 import com.danoff.team.db.tables.Databasechangeloglock;
 import com.danoff.team.db.tables.Member;
 import com.danoff.team.db.tables.MemberContact;
+import com.danoff.team.db.tables.Team;
 import com.danoff.team.db.tables.Title;
 
 import javax.annotation.Generated;
@@ -51,6 +52,11 @@ public class Tables {
      * The table <code>PUBLIC.MEMBER_CONTACT</code>.
      */
     public static final MemberContact MEMBER_CONTACT = com.danoff.team.db.tables.MemberContact.MEMBER_CONTACT;
+
+    /**
+     * The table <code>PUBLIC.TEAM</code>.
+     */
+    public static final Team TEAM = com.danoff.team.db.tables.Team.TEAM;
 
     /**
      * The table <code>PUBLIC.TITLE</code>.

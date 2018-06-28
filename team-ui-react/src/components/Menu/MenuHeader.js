@@ -4,7 +4,7 @@ import 'semantic-ui-css/semantic.min.css';
 import { Link } from 'react-router-dom';
 
 export default class MenuHeader extends Component {
-  state = { activeItem: 'team' }
+  state = { activeItem: 'home' }
 
   handleItemClick = (e, { name }) => this.setState({ activeItem: name })
 
@@ -33,6 +33,12 @@ export default class MenuHeader extends Component {
             active={activeItem === 'newMember'}
             onClick={this.handleItemClick}>
                     <Link to="/newMember"> New Members</Link>
+          </Menu.Item>
+          <Menu.Item
+            name='Teams'
+            active={activeItem === 'teams'}
+            onClick={this.handleItemClick}>
+                    <Link to="/teams"> Teams</Link>
           </Menu.Item>
         </Menu>
       </Segment>
